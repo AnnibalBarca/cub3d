@@ -1,0 +1,20 @@
+# Build outputs
+*.o
+*.out
+*.exe
+
+# Libraries and packages
+/libft/
+
+# Editor files
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# macOS files
+.Spotlight-V100
+.Trashes
+
+# Temporary files
+*~
