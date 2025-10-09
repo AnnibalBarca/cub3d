@@ -15,20 +15,19 @@ typedef struct s_color
     int b;
 }   t_color;
 
-typedef struct s_textures
+typedef enum			s_texture
 {
-    char *north;
-    char *south;
-    char *west;
-    char *east;
-}   t_textures;
+	NORTH,
+	SOUTH,
+	WEST,
+	EAST
+}	e_texture;
 
 typedef struct s_player
 {
     int     x;
     int     y;
     char    dir;    /* 'N','S','E','W' */
-    int     count;  /* should be exactly 1 after parsing */
 }   t_player;
 
 typedef struct s_game
@@ -39,7 +38,7 @@ typedef struct s_game
     int         map_height;    /* number of non-empty map rows */
 
     /* Textures and colors parsed from header */
-    t_textures  textures;
+    e_texture  textures;
     t_color     floor_color;
     t_color     ceiling_color;
 

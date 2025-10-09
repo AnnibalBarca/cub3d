@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-int is_player(char c)
+int	is_player(char c)
 {
 	if (c == 'N' || c == 'E' || c == 'S' || c == 'W')
 		return (1);
@@ -20,8 +20,11 @@ int	is_filled_char(char c)
 	return (0);
 }
 
-int surrounding_is_filled(int col, int row, t_game *game)
+int	surrounding_is_filled(int col, int row, t_game *game)
 {
+	if (col == 0 || row == 0 || col == game->map_height
+		|| col == game->map_width)
+		return (0);
 	if (col != 0)
 		if (!is_filled_char(game->map[col - 1][row]))
 			return (0);
@@ -48,7 +51,7 @@ int	walled_checker(t_game *game)
 		row = 0;
 		while (row < game->map_height)
 		{
-			if (game->map[col][row] == '0')
+			if (game->map[col][row] == '0' || is_player(game->map[col][row]))
 			{
 				if (!surrounding_is_filled(col, row, game))
 					return (0);
@@ -64,7 +67,7 @@ int	char_checker(t_game *game)
 {
 	int	col;
 	int	row;
-	int pcount;
+	int	pcount;
 
 	col = 0;
 	pcount = 0;
