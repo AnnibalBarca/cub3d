@@ -1,5 +1,5 @@
 
-#include "so_long.h"
+#include "cub3d.h"
 
 char	*ft_strappend(char *s1, char *s2)
 {
@@ -33,10 +33,9 @@ int	tab_len(char **tab)
 
 int	validate_map(t_game *game)
 {
-	rectangular_checker(game);
-	walled_checker_columns(game);
-	check_screen_size(game);
-	if (player_collectibles_exit_checker(game))
+	if (!walled_checker(game))
+		return (0);
+	if (!char_checker(game))
 		return (0);
 	return (1);
 }
@@ -77,7 +76,7 @@ int	parse_map(t_game *game, char *map_file)
 	int		maplen;
 
 	maplen = ft_strlen(map_file);
-	if (maplen < 5 || ft_strncmp(&map_file[maplen - 4], ".ber", 4) != 0)
+	if (maplen < 5 || ft_strncmp(&map_file[maplen - 4], ".cub", 4) != 0)
 		error_exit("Invalid map file extension", game);
 	fd = open(map_file, O_RDONLY);
 	if (fd < 0)
@@ -91,7 +90,6 @@ int	parse_map(t_game *game, char *map_file)
 			free(tmp);
 		error_message("Failed to read map file");
 	}
-	char_checker(tmp, game);
 	game->map = ft_split(tmp, '\n');
 	free(tmp);
 	if (!validate_map(game))
