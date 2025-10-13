@@ -6,13 +6,11 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 10:58:42 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 10:58:45 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/13 14:36:47 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <stdio.h>
-#include <stdlib.h>
 
 void	error_exit(const char *msg, t_game *game)
 {

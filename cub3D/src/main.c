@@ -1,5 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
+/*   Updated: 2025/10/13 14:53:38 by almeekel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "cub3d.h"
-#include <stdio.h>
 
 void	init_game(t_game *game)
 {
@@ -16,8 +27,8 @@ void	init_game(t_game *game)
 	game->ceiling_color.r = -1;
 	game->ceiling_color.g = -1;
 	game->ceiling_color.b = -1;
-	game->player.x = -1;
-	game->player.y = -1;
+	game->player.x = -1.0f;
+	game->player.y = -1.0f;
 	game->player.dir = '\0';
 	game->has_tex_no = 0;
 	game->has_tex_so = 0;

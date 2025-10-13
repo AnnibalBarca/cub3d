@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:02:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 12:49:58 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/13 14:53:52 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,8 @@ int	char_checker(t_game *game)
 				pcount++;
 				if (pcount > 1)
 					return (0);
-				game->player.x = col;
-				game->player.y = row;
+				game->player.x = (float)col + 0.5f;
+				game->player.y = (float)row + 0.5f;
 				game->player.dir = c;
 			}
 			col++;

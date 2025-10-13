@@ -5,6 +5,7 @@
 # include <errno.h>
 # include <fcntl.h>
 # include <stddef.h>
+# include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
@@ -26,8 +27,8 @@ typedef enum s_texture
 
 typedef struct s_player
 {
-	int			x;
-	int			y;
+	float		x;
+	float		y;
 	char		dir;
 }				t_player;
 
@@ -35,8 +36,8 @@ typedef struct s_game
 {
 	/* Map representation (array of strings, each row as in the file) */
 	char		**map;
-	int			map_width;  /* max visible characters per row (no trailing \n) */
-	int			map_height; /* number of non-empty map rows */
+	int map_width;  /* max visible characters per row (no trailing \n) */
+	int map_height; /* number of non-empty map rows */
 
 	/* Texture paths */
 	char		*tex_north;
@@ -97,5 +98,9 @@ int				is_map_char(char c);
 int				is_filled_char(char c);
 char			get_char_at(t_game *game, int row, int col);
 int				surrounding_is_filled(int row, int col, t_game *game);
+
+/* Parsing utilities */
+char			*skip_spaces(char *str);
+void			trim_end(char *str);
 
 #endif
