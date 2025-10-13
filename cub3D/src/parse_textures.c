@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 14:36:40 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/13 15:44:11 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,21 +83,19 @@ int	parse_textures(t_game *game, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			error_exit("Unexpected EOF while parsing textures", game);
-
 		if (ft_strlen(line) == 0 || line[0] == '\n')
 		{
 			free(line);
-			continue;
+			continue ;
 		}
 		if (parse_texture_identifier(line, game))
 			found++;
 		else
 		{
 			free(line);
-			break;
+			break ;
 		}
 		free(line);
 	}
-
 	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:50:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 14:36:43 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/13 15:44:55 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,9 +44,11 @@ int	tab_len(char **tab)
 
 int	validate_map(t_game *game)
 {
+	char	c;
+
 	if (!walled_checker(game))
 		return (0);
-	if (!char_checker(game))
+	if (!char_checker(game, c))
 		return (0);
 	return (1);
 }

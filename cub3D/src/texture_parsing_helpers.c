@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:59:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 14:36:42 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/13 15:44:30 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ int	validate_required_elements(t_game *game)
 		return (0);
 	return (1);
 }
+
 char	*skip_spaces(char *str)
 {
 	while (*str && (*str == ' ' || *str == '\t'))
@@ -34,7 +35,7 @@ void	trim_end(char *str)
 
 	len = ft_strlen(str);
 	while (len > 0 && (str[len - 1] == ' ' || str[len - 1] == '\t' || str[len
-			- 1] == '\n' || str[len - 1] == '\r'))
+				- 1] == '\n' || str[len - 1] == '\r'))
 	{
 		str[len - 1] = '\0';
 		len--;

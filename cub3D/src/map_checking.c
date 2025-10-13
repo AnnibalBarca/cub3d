@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:02:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 14:53:52 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/13 15:43:01 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,28 @@ int	walled_checker(t_game *game)
 	return (1);
 }
 
-int	char_checker(t_game *game)
+static int	check_and_set_player(t_game *game, int row, int col, int *pcount)
+{
+	char	c;
+
+	c = get_char_at(game, row, col);
+	if (is_player(c))
+	{
+		(*pcount)++;
+		if (*pcount > 1)
+			return (0);
+		game->player.x = (float)col + 0.5f;
+		game->player.y = (float)row + 0.5f;
+		game->player.dir = c;
+	}
+	return (1);
+}
+
+int	char_checker(t_game *game, char c)
 {
 	int		row;
 	int		col;
 	int		pcount;
-	char	c;
 
 	if (!game || !game->map)
 		return (0);
@@ -58,15 +74,8 @@ int	char_checker(t_game *game)
 			c = get_char_at(game, row, col);
 			if (!is_map_char(c))
 				return (0);
-			if (is_player(c))
-			{
-				pcount++;
-				if (pcount > 1)
-					return (0);
-				game->player.x = (float)col + 0.5f;
-				game->player.y = (float)row + 0.5f;
-				game->player.dir = c;
-			}
+			if (!check_and_set_player(game, row, col, &pcount))
+				return (0);
 			col++;
 		}
 		row++;

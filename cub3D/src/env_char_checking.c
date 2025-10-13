@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:00:13 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 14:36:48 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/13 15:40:19 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ int	is_filled_char(char c)
 
 char	get_char_at(t_game *game, int row, int col)
 {
-	int rowlen;
+	int	rowlen;
 
 	if (row < 0 || row >= game->map_height || col < 0)
 		return (' ');
@@ -59,7 +59,5 @@ int	surrounding_is_filled(int row, int col, t_game *game)
 		return (0);
 	if (!is_filled_char(get_char_at(game, row, col + 1)))
 		return (0);
-	
 	return (1);
 }
-
