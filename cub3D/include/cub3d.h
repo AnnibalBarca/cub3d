@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cub3d.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
+/*   Updated: 2025/10/13 15:15:39 by almeekel         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CUB3D_H
 # define CUB3D_H
 
@@ -34,33 +46,22 @@ typedef struct s_player
 
 typedef struct s_game
 {
-	/* Map representation (array of strings, each row as in the file) */
 	char		**map;
-	int map_width;  /* max visible characters per row (no trailing \n) */
-	int map_height; /* number of non-empty map rows */
-
-	/* Texture paths */
+	int map_width;
+	int map_height;
 	char		*tex_north;
 	char		*tex_south;
 	char		*tex_west;
 	char		*tex_east;
-
-	/* Colors parsed from header */
 	t_color		floor_color;
 	t_color		ceiling_color;
-
-	/* Player discovered while parsing */
 	t_player	player;
-
-	/* Presence flags for required elements from header (NO,SO,WE,EA,F,C) */
 	int			has_tex_no;
 	int			has_tex_so;
 	int			has_tex_we;
 	int			has_tex_ea;
 	int			has_floor_color;
 	int			has_ceiling_color;
-
-	/* Optional: desired screen/window size determined from map or config */
 	int			screen_width;
 	int			screen_height;
 }				t_game;
