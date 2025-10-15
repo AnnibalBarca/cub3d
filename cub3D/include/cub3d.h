@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/15 13:53:01 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/15 14:16:45 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "../libft/libft.h"
 # include <errno.h>
 # include <fcntl.h>
+# include <math.h>
 # include <stddef.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -41,7 +42,9 @@ typedef struct s_player
 {
 	float		x;
 	float		y;
-	char		dir;
+	double		dir;
+	double		plane_x;
+	double		plane_y;
 }				t_player;
 
 typedef struct s_game

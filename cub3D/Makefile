@@ -5,6 +5,7 @@ NAME = cub3d
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
 INCLUDES = -I include -I libft
+LDFLAGS = -L$(LIBFT_DIR) -lft -lm
 
 # Source files
 SRC_DIR = src
