@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:50:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/15 13:36:26 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:58:09 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,13 @@ static char	*read_map_content(t_game *game, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			break ;
+// fix pour eviter les sauts de ligne dans la map
+		if (ft_strlen(line) <= 1 && game->map_height > 0)
+		{
+			free(line);
+			free(tmp);
+			return (NULL);
+		}
 		if ((int)ft_strlen(line) > game->map_width)
 			game->map_width = ft_strlen(line) - 1;
 		if (ft_strlen(line) > 1)
