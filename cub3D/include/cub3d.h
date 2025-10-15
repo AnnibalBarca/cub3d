@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 15:15:39 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/15 13:53:01 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,8 @@ typedef struct s_player
 typedef struct s_game
 {
 	char		**map;
-	int map_width;
-	int map_height;
+	int			map_width;
+	int			map_height;
 	char		*tex_north;
 	char		*tex_south;
 	char		*tex_west;
@@ -85,7 +85,7 @@ int				validate_required_elements(t_game *game);
 
 /* Map validation (from map_parsing.c) */
 int				validate_map(t_game *game);
-int				char_checker(t_game *game);
+int				char_checker(t_game *game, char c);
 int				walled_checker(t_game *game);
 
 /* Error helpers (parsing should call these on fatal problems) */
