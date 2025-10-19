@@ -3,18 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/27 16:00:39 by alexandreme       #+#    #+#             */
-/*   Updated: 2024/11/21 15:48:50 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/04 16:39:29 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:47:23 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "all.h"
 
 int	ft_toupper(int c)
 {
 	if (c >= 'a' && c <= 'z')
-	{
-		return (c -= 32);
-	}
+		c -= 32;
 	return (c);
 }
+
+// #include <stdio.h>
+// int	main(int ac, char **av)
+// {
+// 	if (ac == 2)
+// 	{
+// 		printf("%c", ft_toupper(*av[1]));
+// 	}
+// }

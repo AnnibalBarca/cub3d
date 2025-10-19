@@ -3,47 +3,34 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 16:09:01 by almeekel          #+#    #+#             */
-/*   Updated: 2024/12/09 13:42:17 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/12 19:50:43 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/11 16:04:00 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-
-static int	is_in_set(char c, const char *set)
-{
-	while (*set)
-	{
-		if (c == *set)
-			return (1);
-		set++;
-	}
-	return (0);
-}
+#include "all.h"
 
 char	*ft_strtrim(char const *s1, char const *set)
 {
-	char	*res;
 	size_t	start;
 	size_t	end;
-	size_t	i;
+	char	*array;
 
-	if (!s1 || !set)
-		return (NULL);
 	start = 0;
-	while (s1[start] && is_in_set(s1[start], set))
-		start++;
 	end = ft_strlen(s1);
-	while (end > start && is_in_set(s1[end - 1], set))
+	while (s1[start] && ft_strchr((char *)set, s1[start]))
+		start++;
+	end--;
+	while (ft_strchr((char *)set, s1[end]))
 		end--;
-	res = malloc(sizeof(char) * (end - start + 1));
-	if (!res)
-		return (NULL);
-	i = 0;
-	while (start < end)
-		res[i++] = s1[start++];
-	res[i] = '\0';
-	return (res);
+	array = ft_substr(s1, start, (end - start + 1));
+	return (array);
 }
+// #include <stdio.h>
+// int main(int ac, char **av)
+// {
+// 	printf("%s\n", ft_strtrim(av[1], av[2]));
+// 	//printf("%p\n", ft_strchr((char *)"1", "11123456111"[10]));
+// }

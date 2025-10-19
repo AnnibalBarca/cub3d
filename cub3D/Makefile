@@ -4,11 +4,11 @@ NAME = cub3d
 
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror -g
-INCLUDES = -I include -I libft
+INCLUDES = -I includes -I libft
 LDFLAGS = -L$(LIBFT_DIR) -lft -lm
 
 # Source files
-SRC_DIR = src
+SRC_DIR = src/parsing
 SRCS = $(SRC_DIR)/main.c \
        $(SRC_DIR)/parse_textures.c \
        $(SRC_DIR)/parse_colors.c \

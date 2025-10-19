@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstsize_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/22 15:42:45 by almeekel          #+#    #+#             */
-/*   Updated: 2024/12/09 13:45:02 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/14 15:38:56 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:47:23 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "all.h"
 
 int	ft_lstsize(t_list *lst)
 {
-	size_t	count;
+	size_t	size;
 
-	count = 0;
+	size = 0;
 	while (lst)
 	{
-		count++;
 		lst = lst->next;
+		size++;
 	}
-	return (count);
+	return (size);
 }

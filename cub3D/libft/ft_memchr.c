@@ -3,27 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 14:32:35 by almeekel          #+#    #+#             */
-/*   Updated: 2024/11/20 14:47:06 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/05 18:30:46 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:47:23 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
+#include "all.h"
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned char	*tmp;
-	unsigned char	uc;
+	const char	*s2;
+	size_t		i;
 
-	uc = (unsigned char)c;
-	tmp = (unsigned char *)s;
-	while (n--)
+	s2 = s;
+	i = 0;
+	while (i < n)
 	{
-		if (*tmp == uc)
-			return (tmp);
-		tmp++;
+		if (s2[i] == (char)c)
+		{
+			return ((char *)s + i);
+		}
+		i++;
 	}
 	return (NULL);
 }

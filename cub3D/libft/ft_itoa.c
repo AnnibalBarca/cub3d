@@ -3,56 +3,68 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 15:59:22 by almeekel          #+#    #+#             */
-/*   Updated: 2024/11/22 17:31:32 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/12 13:30:50 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:47:23 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "all.h"
 
-static int	get_len(int n)
+static int	ft_size(int n)
 {
-	int		len;
+	int	size;
 
-	if (n <= 0)
-		len = 1;
-	else
-		len = 0;
+	size = 0;
+	if (n == 0)
+		return (1);
+	if (n < 0)
+	{
+		size++;
+		n = -n;
+	}
 	while (n)
 	{
 		n /= 10;
-		len++;
+		size++;
 	}
-	return (len);
+	return (size);
 }
 
 char	*ft_itoa(int n)
 {
-	char	*str;
-	int		len;
-	long	num;
+	int		size;
+	char	*array;
 
-	num = n;
-	len = get_len(n);
-	str = ft_calloc(len + 1, sizeof(char));
-	if (!str)
+	if (n == -2147483648)
+		return (ft_strdup("-2147483648"));
+	size = ft_size(n);
+	array = (char *)malloc(sizeof(char) * (size + 1));
+	if (!array)
 		return (NULL);
-	if (num == 0)
+	array[size] = '\0';
+	if (n == 0)
+		array[0] = '0';
+	if (n < 0)
 	{
-		str[0] = '0';
-		return (str);
+		array[0] = '-';
+		n = -n;
 	}
-	if (num < 0)
+	while (n)
 	{
-		str[0] = '-';
-		num = -num;
+		array[--size] = (n % 10) + '0';
+		n /= 10;
 	}
-	while (num)
-	{
-		str[--len] = (num % 10) + '0';
-		num /= 10;
-	}
-	return (str);
+	return (array);
 }
+// #include <stdio.h>
+
+// int	main(void)
+// {
+// 	int	n;
+
+// 	n = -1165165572;
+// 	ft_itoa(n);
+// 	printf("%d", n);
+// }

@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/05/23 00:06:00 by alexandreme       #+#    #+#             */
-/*   Updated: 2024/11/21 14:29:41 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/04 16:38:27 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:46:37 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "all.h"
+
 int	ft_isprint(int c)
 {
-	return (c >= 32 && c <= 126);
+	if (c >= 32 && c < 127)
+		return (1);
+	return (0);
 }
+
+// #include <stdio.h>
+// int	main(int ac, char **av)
+// {
+// 	if (ac == 2)
+// 	{
+// 		printf("%d", ft_isprint(av[1]));
+// 	}
+// }

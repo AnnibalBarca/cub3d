@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_checking.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:02:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/15 14:24:34 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:32:16 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,29 @@ static void	set_player_direction(t_game *game, char dir_char)
 {
 	if (dir_char == 'N')
 	{
-		game->player.dir = 3 * M_PI / 2;
+		game->player.dir_x = 0;
+		game->player.dir_y = -1;
 		game->player.plane_x = 0.66;
 		game->player.plane_y = 0;
 	}
 	else if (dir_char == 'S')
 	{
-		game->player.dir = M_PI / 2;
+		game->player.dir_x = 0;
+		game->player.dir_y = 1;
 		game->player.plane_x = -0.66;
 		game->player.plane_y = 0;
 	}
 	else if (dir_char == 'E')
 	{
-		game->player.dir = 0;
+		game->player.dir_x = 1;
+		game->player.dir_y = 0;
 		game->player.plane_x = 0;
 		game->player.plane_y = 0.66;
 	}
 	else if (dir_char == 'W')
 	{
-		game->player.dir = M_PI;
+		game->player.dir_x = -1;
+		game->player.dir_y = 0;
 		game->player.plane_x = 0;
 		game->player.plane_y = -0.66;
 	}
@@ -77,8 +81,8 @@ static int	check_and_set_player(t_game *game, int row, int col, int *pcount)
 		(*pcount)++;
 		if (*pcount > 1)
 			return (0);
-		game->player.x = (float)col + 0.5f;
-		game->player.y = (float)row + 0.5f;
+		game->player.pos_x = (float)col + 0.5f;
+		game->player.pos_y = (float)row + 0.5f;
 		set_player_direction(game, c);
 	}
 	return (1);

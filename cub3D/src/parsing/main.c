@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 15:45:03 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:30:36 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,10 @@ void	init_game(t_game *game)
 	game->ceiling_color.r = -1;
 	game->ceiling_color.g = -1;
 	game->ceiling_color.b = -1;
-	game->player.x = -1.0f;
-	game->player.y = -1.0f;
-	game->player.dir = '\0';
+	game->player.pos_x = -1.0f;
+	game->player.pos_y = -1.0f;
+	game->player.dir_x = 0;
+	game->player.dir_y = 0;
 	game->has_tex_no = 0;
 	game->has_tex_so = 0;
 	game->has_tex_we = 0;

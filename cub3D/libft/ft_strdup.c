@@ -3,30 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/21 14:02:52 by almeekel          #+#    #+#             */
-/*   Updated: 2024/11/21 15:52:58 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/07 15:04:33 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:47:23 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdlib.h>
+#include "all.h"
 
 char	*ft_strdup(const char *s)
 {
-	char	*res;
 	int		i;
+	char	*dup;
 
 	i = 0;
-	res = ft_calloc(ft_strlen(s) + 1, sizeof(char));
-	if (!res)
+	while (s[i])
+		i++;
+	dup = (char *)malloc(sizeof(char) * i + 1);
+	if (!dup)
 		return (NULL);
+	i = 0;
 	while (s[i])
 	{
-		res[i] = s[i];
+		dup[i] = s[i];
 		i++;
 	}
-	res[i] = '\0';
-	return (res);
+	dup[i] = '\0';
+	return (dup);
 }
+// #include <stdio.h>
+// int	main(int ac, char **av)
+// {
+// 	char	*tab;
+
+// 	tab = ft_strdup("123");
+// 	printf("%s", tab);
+// }

@@ -3,29 +3,37 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 13:27:00 by almeekel          #+#    #+#             */
-/*   Updated: 2024/12/09 13:33:59 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/05 09:14:22 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/07 17:05:27 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "all.h"
 
 char	*ft_strrchr(const char *s, int c)
 {
-	const char		*last_occurrence;
-	unsigned char	uc;
+	size_t	i;
 
-	last_occurrence = NULL;
-	uc = (unsigned char)c;
-	while (*s)
+	i = 0;
+	while (s[i])
+		i++;
+	i++;
+	while (i > 0)
 	{
-		if (*s == uc)
-			last_occurrence = s;
-		s++;
+		i--;
+		if (s[i] == (char)c)
+			return ((char *)s + i);
 	}
-	if (uc == '\0')
-		return ((char *)s);
-	return ((char *)last_occurrence);
+	return (NULL);
 }
+
+// #include <stdio.h>
+// int	main(int ac, char **av)
+// {
+// 	if (ac == 2)
+// 	{
+// 		printf("%s", ft_strrchr(av[1], '.'));
+// 	}
+// }

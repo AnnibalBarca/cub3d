@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/07 14:58:49 by almeekel          #+#    #+#             */
-/*   Updated: 2024/12/09 13:39:46 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/04 16:34:26 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:44:57 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "all.h"
 
-static long int	ft_strtol(const char *str)
+int	ft_atoi(const char *str)
 {
 	long int	result;
 	int			sign;
@@ -31,8 +31,8 @@ static long int	ft_strtol(const char *str)
 		if ((result * 10 + str[i] - '0') / 10 != result)
 		{
 			if (sign == -1)
-				return (LONG_MIN);
-			return (LONG_MAX);
+				return ((int)LONG_MIN);
+			return ((int)LONG_MAX);
 		}
 		result = result * 10 + str[i] - '0';
 		i++;
@@ -40,7 +40,15 @@ static long int	ft_strtol(const char *str)
 	return (result * sign);
 }
 
-int	ft_atoi(const char *str)
-{
-	return ((int)ft_strtol(str));
-}
+// #include <stdio.h>
+// int	main(int ac, char **av)
+// {
+// 	int	x;
+
+// 	x = ft_atoi("-12315425424545");
+// 	printf("%d\n", x);
+// 	x = atoi("-12354564646545645");
+// 	printf("%d", x);
+// }
+//   if (res > (INT_MAX - (str[i] - '0')) / 10)
+//         return ((x == 1) ? INT_MAX : INT_MIN);

@@ -3,17 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/15 14:16:45 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/19 20:57:01 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include "../libft/libft.h"
+# include "../libft/all.h"
 # include <errno.h>
 # include <fcntl.h>
 # include <math.h>
@@ -22,6 +22,10 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+// # include <X11/X.h>
+// # include <X11/keysym.h>
+// # include <mlx.h>
+
 
 typedef struct s_color
 {
@@ -38,17 +42,38 @@ typedef enum s_texture
 	EAST
 }				e_texture;
 
-typedef struct s_player
+typedef struct s_key
 {
-	float		x;
-	float		y;
-	double		dir;
+	int	go_forward;
+	int	go_backward;
+	int	go_left;
+	int	go_right;
+	int	turn_left;
+	int	turn_right;
+}	t_key;
+
+typedef struct	s_player
+{
+	double		pos_x;
+	double		pos_y;
+	double		dir_x;
+	double		dir_y;
 	double		plane_x;
 	double		plane_y;
 }				t_player;
 
+typedef struct	s_data
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	int			width;
+	int			height;
+}				t_data;
+
 typedef struct s_game
 {
+	t_data		data;
+	t_key		key;
 	char		**map;
 	int			map_width;
 	int			map_height;

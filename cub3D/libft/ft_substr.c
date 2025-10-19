@@ -3,37 +3,46 @@
 /*                                                        :::      ::::::::   */
 /*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/20 15:56:03 by almeekel          #+#    #+#             */
-/*   Updated: 2024/12/09 13:34:14 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/12 13:59:05 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/02/06 17:47:23 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "all.h"
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {
-	char			*str;
-	size_t			i;
-	unsigned int	slen;
+	size_t	i;
+	size_t	size;
+	char	*array;
 
-	slen = ft_strlen(s);
-	if (!s)
-		return (NULL);
-	if (start > slen)
-		return (ft_strdup(""));
-	if (slen - start < len)
-		len = slen - start;
-	str = (char *)malloc(sizeof(char) * (len + 1));
-	if (!str)
-		return (NULL);
+	size = 0;
 	i = 0;
-	while (i < len)
+	if (start >= ft_strlen(s))
 	{
-		str[i] = s[start + i];
-		i++;
+		array = (char *)malloc(1);
+		if (!array)
+			return (NULL);
+		array[0] = '\0';
+		return (array);
 	}
-	str[i] = '\0';
-	return (str);
+	while (size < len && s[start + size])
+		size++;
+	array = (char *)malloc(sizeof(char) * (size + 1));
+	if (!array)
+		return (NULL);
+	while (s[start] && i < size)
+		array[i++] = s[start++];
+	array[i] = '\0';
+	return (array);
 }
+// #include <stdio.h>
+// int	main(int ac, char **av)
+// {
+// 	char	*array;
+
+// 	array = ft_substr(av[1], 2, 5);
+// 	printf("%s", array);
+// }

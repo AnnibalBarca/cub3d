@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putchar_len.c                                   :+:      :+:    :+:   */
+/*   len_uputnbr_error.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42lyon.fr>      +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/17 18:13:25 by Mimoulapino       #+#    #+#             */
-/*   Updated: 2025/02/21 21:24:31 by almeekel         ###   ########.fr       */
+/*   Created: 2024/11/25 16:29:39 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/03/13 00:15:34 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../all.h"
 
-int	ft_putchar_len(char *s)
+size_t	len_uputnbr_error(unsigned int nb)
 {
-	int	len;
+	size_t			len;
+	unsigned int	res;
+	unsigned int	temp;
 
 	len = 0;
-	if (!s)
-		return (write(1, "(null)", 6));
-	while (s[len])
+	res = iterative_count_error(nb);
+	while (res)
 	{
-		write(1, &s[len], 1);
+		temp = nb / res;
+		if (len_putchar_error((temp % 10) + 48) == -1)
+			return (-1);
+		res /= 10;
 		len++;
 	}
 	return (len);
