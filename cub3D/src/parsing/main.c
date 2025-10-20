@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/19 20:30:36 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/20 10:01:01 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,12 @@ void	init_game(t_game *game)
 	game->has_ceiling_color = 0;
 	game->screen_width = 0;
 	game->screen_height = 0;
+	game->key.go_backward = 0;
+	game->key.go_forward = 0;
+	game->key.go_left = 0;
+	game->key.go_right = 0;
+	game->key.turn_left = 0;
+	game->key.turn_right = 0;
 }
 
 void	free_game(t_game *game)

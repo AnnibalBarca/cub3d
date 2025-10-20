@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/19 20:57:01 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/20 10:19:34 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,9 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
-// # include <X11/X.h>
-// # include <X11/keysym.h>
-// # include <mlx.h>
+# include <X11/X.h>
+# include <X11/keysym.h>
+# include "../minilibx-linux/mlx.h"
 
 
 typedef struct s_color
@@ -41,6 +41,17 @@ typedef enum s_texture
 	WEST,
 	EAST
 }				e_texture;
+
+typedef struct s_img
+{
+	void		*mlx_img;
+	char		*addr;
+	int			bpp;
+	int			line_len;
+	int			endian;
+	int			w;
+	int			h;
+}				t_img;
 
 typedef struct s_key
 {
@@ -77,10 +88,7 @@ typedef struct s_game
 	char		**map;
 	int			map_width;
 	int			map_height;
-	char		*tex_north;
-	char		*tex_south;
-	char		*tex_west;
-	char		*tex_east;
+	t_img		textures[4];
 	t_color		floor_color;
 	t_color		ceiling_color;
 	t_player	player;

@@ -1,60 +1,107 @@
-# Makefile for cub3D parser
-
 NAME = cub3d
 
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g
-INCLUDES = -I includes -I libft
-LDFLAGS = -L$(LIBFT_DIR) -lft -lm
+CC = cc
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -I includes -I libft -I minilibx-linux -g3
+OBJ_DIR = src/obj
+SRC_DIR = src
 
-# Source files
-SRC_DIR = src/parsing
-SRCS = $(SRC_DIR)/main.c \
-       $(SRC_DIR)/parse_textures.c \
-       $(SRC_DIR)/parse_colors.c \
-       $(SRC_DIR)/texture_parsing_helpers.c \
-       $(SRC_DIR)/map_parsing.c \
-       $(SRC_DIR)/env_char_checking.c \
-       $(SRC_DIR)/map_checking.c \
-       $(SRC_DIR)/error_handlers.c
+SRC_ALL =	$(SRC_DIR)/exec/main.c	\
+			$(SRC_DIR)/exec/init.c	\
 
-# Object files
-OBJ_DIR = obj
-OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_ALL:.c=.o))
+DEPS = $(OBJ:.o=.d)
+NB = $(words $(SRC_ALL))
+COUNTER = 0
 
-# Libft
-LIBFT_DIR = libft
+LDFLAGS = -L$(LIBFT_DIR) -lft -L$(MLX_DIR) -lmlx_Linux -lXext -lX11 -lm
+LIBFT_DIR = ./libft
 LIBFT = $(LIBFT_DIR)/libft.a
+MLX_DIR = ./minilibx-linux
+MLX = $(MLX_DIR)/libmlx_Linux.a
 
-# Rules
-all: $(LIBFT) $(NAME)
+RST = \033[0m
+RED = \033[38;5;196m
+RED_ORANGE = \033[38;5;202m
+ORANGE = \033[38;5;208m
+ORANGE_YELLOW = \033[38;5;214m
+YELLOW = \033[38;5;220m
+YELLOW_GREEN = \033[38;5;154m
+LIGHT_GREEN = \033[38;5;118m
+GREEN = \033[38;5;46m
+CYAN = \033[38;5;51m
+PURPLE = \033[38;5;129m
+PINK = \033[38;5;199m
+BLUE=\033[38;2;64;224;208m
+
+define loading_bar
+	$(eval COUNTER=$(shell echo $$(($(COUNTER)+1))))
+	@CURRENT=$$(( $(COUNTER) * 50 / $(NB) )); \
+	PERCENT=$$(( $(COUNTER) * 100 / $(NB) )); \
+	LOADING_BAR="["; \
+	for i in $$(seq 1 $$CURRENT); do \
+		if [ $$i -le 6 ]; then \
+		    LOADING_BAR=$$LOADING_BAR"$(RED)█$(RST)"; \
+		elif [ $$i -le 12 ]; then \
+		    LOADING_BAR=$$LOADING_BAR"$(RED_ORANGE)█$(RST)"; \
+		elif [ $$i -le 18 ]; then \
+		    LOADING_BAR=$$LOADING_BAR"$(ORANGE)█$(RST)"; \
+		elif [ $$i -le 25 ]; then \
+		    LOADING_BAR=$$LOADING_BAR"$(ORANGE_YELLOW)█$(RST)"; \
+		elif [ $$i -le 31 ]; then \
+		    LOADING_BAR=$$LOADING_BAR"$(YELLOW)█$(RST)"; \
+		elif [ $$i -le 37 ]; then \
+		    LOADING_BAR=$$LOADING_BAR"$(YELLOW_GREEN)█$(RST)"; \
+		elif [ $$i -le 43 ]; then \
+		    LOADING_BAR=$$LOADING_BAR"$(LIGHT_GREEN)█$(RST)"; \
+		else \
+		    LOADING_BAR=$$LOADING_BAR"$(GREEN)█$(RST)"; \
+		fi; \
+	done; \
+	for i in $$(seq $$(($$CURRENT + 1)) 50); do \
+	    LOADING_BAR=$$LOADING_BAR"$(RST)░"; \
+	done; \
+	LOADING_BAR=$$LOADING_BAR"]"; \
+	printf "\033[K\r%b %3d%% $(CYAN)⚙$(RST)  Compiling $(PURPLE)%s$(RST) ($(GREEN)%d$(RST)/$(BLUE)%d$(RST))" \
+	    "$$LOADING_BAR" "$$PERCENT" "$<" "$(COUNTER)" "$(NB)";
+endef
+
+all:	$(LIBFT) $(MLX) $(OBJ_DIR) $(NAME)
+
+$(OBJ_DIR)/%.o: %.c Makefile
+	@mkdir -p $(dir $@)
+	$(call loading_bar)
+	@$(CC) $(CFLAGS) -o $@ -c $<
+
+-include $(DEPS)
+
+$(NAME): $(OBJ) $(LIBFT) $(MLX)
+	@echo ""
+	@printf "$(GREEN)✓ Linking $(CYAN)$(NAME)$(RST)...\n"
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
+	@printf "$(BLUE)╔════════════════════════════════════════╗$(RST)\n"
+	@printf "$(BLUE)║$(RST)        $(GREEN)✓ COMPILATION SUCCESS! ✓$(RST)        $(BLUE)║$(RST)\n"
+	@printf "$(BLUE)╚════════════════════════════════════════╝$(RST)\n"
+
+$(OBJ_DIR):
+	@mkdir -p $(OBJ_DIR)
 
 $(LIBFT):
-	@echo "Building libft..."
-	@make -C $(LIBFT_DIR)
+	@$(MAKE) -C $(LIBFT_DIR)
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
-	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
-
-$(NAME): $(OBJS) $(LIBFT)
-	$(CC) $(CFLAGS) $(OBJS) $(LIBFT) -o $(NAME)
-	@echo "✅ $(NAME) compiled successfully!"
+$(MLX):
+	@$(MAKE) -C $(MLX_DIR)
 
 clean:
+	@echo "$(RED)🗑  Cleaning objects...$(RST)"
 	@rm -rf $(OBJ_DIR)
-	@make -C $(LIBFT_DIR) clean
-	@echo "🧹 Object files cleaned"
+	@$(MAKE) -C $(LIBFT_DIR) clean
+	@$(MAKE) -C $(MLX_DIR) clean
 
 fclean: clean
+	@echo "$(RED)🗑  Removing $(NAME)...$(RST)"
 	@rm -f $(NAME)
-	@make -C $(LIBFT_DIR) fclean
-	@echo "🧹 Executable cleaned"
+	@$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
 
-test: $(NAME)
-	@echo "\n=== Testing complete.cub ==="
-	./$(NAME) ../test_maps/complete.cub
-
-.PHONY: all clean fclean re test
+.PHONY: all clean fclean re
