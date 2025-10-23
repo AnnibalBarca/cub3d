@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/23 11:33:35 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:23:22 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,11 @@
 static int	store_texture(t_game *game, char *path, e_texture tex_type)
 {
 	char	*dup;
+	int		fd;
 
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (print_e("Texture file does not exist or cannot be opened", 0));
 	dup = ft_strdup(path);
 	if (!dup)
 		return (print_e("Memory allocation failed", 0));

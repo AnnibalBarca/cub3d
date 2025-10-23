@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/23 11:30:00 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:27:22 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ int	parse_cub_file(t_game *game, char *filename)
 
 	if (ft_strlen(filename) < 5 || ft_strncmp(&filename[ft_strlen(filename)
 				- 4], ".cub", 4) != 0)
-		return (print_e("Invalid file extension (expected .cub)", 0));
+		return (print_e("Invalid file extension (expected .cub)\n", 0));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		return (print_e("Failed to open file", 0));
+		return (print_e("Failed to open file\n", 0));
 	if (!parse_textures(game, fd))
 	{
 		close(fd);
@@ -59,7 +59,7 @@ int	parse_cub_file(t_game *game, char *filename)
 	if (!validate_required_elements(game))
 	{
 		close(fd);
-		return(print_e("Missing required elements (NO/SO/WE/EA/F/C)", 2), 0);
+		return(print_e("Missing required elements (NO/SO/WE/EA/F/C)\n", 2), 0);
 	}
 	if (!parse_map(game, fd))
 	{

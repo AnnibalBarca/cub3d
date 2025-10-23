@@ -33,10 +33,10 @@ void	init_textures(t_game *game)
 	game->has_tex_so = 0;
 	game->has_tex_we = 0;
 	game->has_tex_ea = 0;
-	game->path_east = 0;
-	game->path_north = 0;
-	game->path_north = 0;
-	game->path_west = 0;
+	game->path_north = NULL;
+	game->path_south = NULL;
+	game->path_east = NULL;
+	game->path_west = NULL;
 }
 
 void	init_game(t_game *game)
