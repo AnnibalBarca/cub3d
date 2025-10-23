@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:03:45 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/23 14:36:19 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:36:07 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	**split_rgb(char *rgb_str)
 				free(split[i++]);
 			free(split);
 		}
-		ft_putstr_fd("Error\nInvalid RGB format (expected R,G,B)", 0);
+		ft_putstr_fd("Invalid RGB format (expected R,G,B)", 0);
 		split = NULL;
 	}
 	return (split);
