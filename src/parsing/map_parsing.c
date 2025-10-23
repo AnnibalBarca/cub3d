@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:50:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/23 11:53:00 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/23 15:46:36 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,9 +48,9 @@ int	validate_map(t_game *game)
 
 	c = 'c';
 	if (!walled_checker(game))
-		return (0);
+		return (print_e("Map layout is incorrect\n", 0));
 	if (!char_checker(game, c))
-		return (0);
+		return (print_e("Map contains wrong characters\n", 0));
 	return (1);
 }
 
