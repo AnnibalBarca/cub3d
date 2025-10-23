@@ -3,42 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 15:44:11 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/23 11:33:35 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	store_texture(t_game *game, char *path, e_texture tex_type)
+static int	store_texture(t_game *game, char *path, e_texture tex_type)
 {
 	char	*dup;
 
 	dup = ft_strdup(path);
 	if (!dup)
-		error_exit("Memory allocation failed", game);
+		return (print_e("Memory allocation failed", 0));
 	if (tex_type == NORTH)
 	{
-		game->tex_north = dup;
+		game->path_north = dup;
 		game->has_tex_no = 1;
 	}
 	else if (tex_type == SOUTH)
 	{
-		game->tex_south = dup;
+		game->path_south = dup;
 		game->has_tex_so = 1;
 	}
 	else if (tex_type == WEST)
 	{
-		game->tex_west = dup;
+		game->path_west = dup;
 		game->has_tex_we = 1;
 	}
 	else if (tex_type == EAST)
 	{
-		game->tex_east = dup;
+		game->path_east = dup;
 		game->has_tex_ea = 1;
 	}
+	return (1);
 }
 
 static int	identify_texture(char *id, t_game *game)
@@ -67,8 +68,9 @@ static int	parse_texture_identifier(char *line, t_game *game)
 	path = skip_spaces(id + 2);
 	trim_end(path);
 	if (ft_strlen(path) == 0)
-		error_exit("Empty texture path", game);
-	store_texture(game, path, tex_type);
+		return(print_e("Empty texture path", 0));
+	if (!store_texture(game, path, tex_type))
+		return (0);
 	return (1);
 }
 
@@ -82,7 +84,7 @@ int	parse_textures(t_game *game, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			error_exit("Unexpected EOF while parsing textures", game);
+			return(print_e("Unexpected EOF while parsing textures", 0));
 		if (ft_strlen(line) == 0 || line[0] == '\n')
 		{
 			free(line);

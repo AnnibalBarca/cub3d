@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/20 10:19:34 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/23 11:53:22 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,9 @@
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "../minilibx-linux/mlx.h"
+# define MAP_HEIGHT 500
+# define MAP_WIDTH	500
+# define P_SPEED	1
 
 
 typedef struct s_color
@@ -71,6 +74,7 @@ typedef struct	s_player
 	double		dir_y;
 	double		plane_x;
 	double		plane_y;
+	char		player_letter;
 }				t_player;
 
 typedef struct	s_data
@@ -81,6 +85,31 @@ typedef struct	s_data
 	int			height;
 }				t_data;
 
+typedef struct s_ray
+{
+	double		raydir_x;
+	double		raydir_y;
+	double		angle;
+	double		camera_x;
+	double		delta_distx;
+	double		delta_disty;
+	int			map_x;
+	int			map_y;
+	int			step_x;
+	int			step_y;
+	double		side_disty;
+	double		side_distx;
+	int			hit;
+	double		perp_dist;
+	double		line_height;
+	double		wall_x;
+	double		draw_start;
+	double		draw_end;
+	int			tex_x;
+	int			tex_y;
+	int			side;
+}				t_ray;
+
 typedef struct s_game
 {
 	t_data		data;
@@ -89,9 +118,14 @@ typedef struct s_game
 	int			map_width;
 	int			map_height;
 	t_img		textures[4];
+	t_ray		raycast;
 	t_color		floor_color;
 	t_color		ceiling_color;
 	t_player	player;
+	char		*path_north;
+	char		*path_south;
+	char		*path_east;
+	char		*path_west;
 	int			has_tex_no;
 	int			has_tex_so;
 	int			has_tex_we;
@@ -104,8 +138,12 @@ typedef struct s_game
 
 /* Main parsing pipeline */
 int				parse_cub_file(t_game *game, char *filename);
-void			init_game(t_game *game);
 void			free_game(t_game *game);
+
+/* Init functions */
+void	init_game(t_game *game);
+void	set_vector(t_player *player);
+void	set_camera(t_player *player);
 
 /* Phase 1: Parse textures (NO, SO, WE, EA) */
 int				parse_textures(t_game *game, int fd);
@@ -125,8 +163,9 @@ int				char_checker(t_game *game, char c);
 int				walled_checker(t_game *game);
 
 /* Error helpers (parsing should call these on fatal problems) */
-void			error_exit(const char *msg, t_game *game);
-void			error_message(const char *msg);
+int				print_e(char *str, int status);
+
+
 
 /* Map Parsing Utilities */
 int				tab_len(char **tab);

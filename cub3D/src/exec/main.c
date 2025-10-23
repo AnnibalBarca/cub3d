@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 18:41:58 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/20 10:06:20 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/23 14:23:51 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,12 +122,12 @@ int	main(int ac, char **av)
 	game.data.mlx_ptr = mlx_init();
 	if (!game.data.mlx_ptr)
 		return (1);
-	// PARSING
 	init_game(&game);
-	game.map_height = 500;
-	game.map_width = 500;
+	// PARSING
+	game.map_height = MAP_HEIGHT;
+	game.map_width = MAP_WIDTH;
 	game.data.win_ptr = mlx_new_window(game.data.mlx_ptr, game.map_width,
-			game.map_height, "");
+			game.map_height, "cub3d");
 	if (!game.data.win_ptr)
 	{
 		// FREE ALL

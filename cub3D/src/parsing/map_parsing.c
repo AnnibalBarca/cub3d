@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:50:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/15 13:58:09 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/23 11:53:00 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char	*read_map_content(t_game *game, int fd)
 	tmp = ft_strdup("");
 	if (!tmp)
 	{
-		error_exit("Failed to allocate memory", game);
+		ft_putstr_fd("Failed to allocate memory", 2);
 		return (NULL);
 	}
 	while (1)
@@ -100,8 +100,7 @@ int	parse_map(t_game *game, int fd)
 	{
 		if (tmp)
 			free(tmp);
-		error_message("Failed to read map file");
-		return (0);
+		print_e("Failed to read map file", 0);
 	}
 	game->map = ft_split(tmp, '\n');
 	free(tmp);

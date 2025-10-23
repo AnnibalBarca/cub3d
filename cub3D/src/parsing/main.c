@@ -6,59 +6,24 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/20 10:01:01 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/23 11:30:00 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	init_game(t_game *game)
-{
-	game->map = NULL;
-	game->map_width = 0;
-	game->map_height = 0;
-	game->tex_north = NULL;
-	game->tex_south = NULL;
-	game->tex_west = NULL;
-	game->tex_east = NULL;
-	game->floor_color.r = -1;
-	game->floor_color.g = -1;
-	game->floor_color.b = -1;
-	game->ceiling_color.r = -1;
-	game->ceiling_color.g = -1;
-	game->ceiling_color.b = -1;
-	game->player.pos_x = -1.0f;
-	game->player.pos_y = -1.0f;
-	game->player.dir_x = 0;
-	game->player.dir_y = 0;
-	game->has_tex_no = 0;
-	game->has_tex_so = 0;
-	game->has_tex_we = 0;
-	game->has_tex_ea = 0;
-	game->has_floor_color = 0;
-	game->has_ceiling_color = 0;
-	game->screen_width = 0;
-	game->screen_height = 0;
-	game->key.go_backward = 0;
-	game->key.go_forward = 0;
-	game->key.go_left = 0;
-	game->key.go_right = 0;
-	game->key.turn_left = 0;
-	game->key.turn_right = 0;
-}
-
 void	free_game(t_game *game)
 {
 	int	i;
 
-	if (game->tex_north)
-		free(game->tex_north);
-	if (game->tex_south)
-		free(game->tex_south);
-	if (game->tex_west)
-		free(game->tex_west);
-	if (game->tex_east)
-		free(game->tex_east);
+	if (game->path_north)
+		free(game->path_north);
+	if (game->path_south)
+		free(game->path_south);
+	if (game->path_west)
+		free(game->path_west);
+	if (game->path_east)
+		free(game->path_east);
 	if (game->map)
 	{
 		i = 0;
@@ -77,10 +42,10 @@ int	parse_cub_file(t_game *game, char *filename)
 
 	if (ft_strlen(filename) < 5 || ft_strncmp(&filename[ft_strlen(filename)
 				- 4], ".cub", 4) != 0)
-		error_exit("Invalid file extension (expected .cub)", game);
+		return (print_e("Invalid file extension (expected .cub)", 0));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		error_exit("Failed to open file", game);
+		return (print_e("Failed to open file", 0));
 	if (!parse_textures(game, fd))
 	{
 		close(fd);
@@ -94,7 +59,7 @@ int	parse_cub_file(t_game *game, char *filename)
 	if (!validate_required_elements(game))
 	{
 		close(fd);
-		error_exit("Missing required elements (NO/SO/WE/EA/F/C)", game);
+		return(print_e("Missing required elements (NO/SO/WE/EA/F/C)", 2), 0);
 	}
 	if (!parse_map(game, fd))
 	{

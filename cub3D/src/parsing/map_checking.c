@@ -6,43 +6,11 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 11:02:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/19 20:32:16 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/21 15:18:19 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-static void	set_player_direction(t_game *game, char dir_char)
-{
-	if (dir_char == 'N')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = -1;
-		game->player.plane_x = 0.66;
-		game->player.plane_y = 0;
-	}
-	else if (dir_char == 'S')
-	{
-		game->player.dir_x = 0;
-		game->player.dir_y = 1;
-		game->player.plane_x = -0.66;
-		game->player.plane_y = 0;
-	}
-	else if (dir_char == 'E')
-	{
-		game->player.dir_x = 1;
-		game->player.dir_y = 0;
-		game->player.plane_x = 0;
-		game->player.plane_y = 0.66;
-	}
-	else if (dir_char == 'W')
-	{
-		game->player.dir_x = -1;
-		game->player.dir_y = 0;
-		game->player.plane_x = 0;
-		game->player.plane_y = -0.66;
-	}
-}
 
 int	walled_checker(t_game *game)
 {
@@ -71,19 +39,18 @@ int	walled_checker(t_game *game)
 	return (1);
 }
 
-static int	check_and_set_player(t_game *game, int row, int col, int *pcount)
+static int	check_and_set(t_game *game, int row, int col, int *pcount)
 {
-	char	c;
-
-	c = get_char_at(game, row, col);
-	if (is_player(c))
+	game->player.player_letter = get_char_at(game, row, col);
+	if (is_player(game->player.player_letter))
 	{
 		(*pcount)++;
 		if (*pcount > 1)
 			return (0);
 		game->player.pos_x = (float)col + 0.5f;
 		game->player.pos_y = (float)row + 0.5f;
-		set_player_direction(game, c);
+		set_vector(&game->player);
+		set_camera(&game->player);
 	}
 	return (1);
 }
@@ -106,7 +73,7 @@ int	char_checker(t_game *game, char c)
 			c = get_char_at(game, row, col);
 			if (!is_map_char(c))
 				return (0);
-			if (!check_and_set_player(game, row, col, &pcount))
+			if (!check_and_set(game, row, col, &pcount))
 				return (0);
 			col++;
 		}

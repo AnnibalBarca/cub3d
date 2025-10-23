@@ -1,25 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_handlers.c                                   :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/13 10:58:42 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 14:36:47 by almeekel         ###   ########.fr       */
+/*   Created: 2025/10/23 11:19:48 by nagaudey          #+#    #+#             */
+/*   Updated: 2025/10/23 11:23:44 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	error_exit(const char *msg, t_game *game)
+int	print_e(char *str, int status)
 {
-	(void)game;
-	printf("Error\n%s\n", msg);
-	exit(1);
-}
-
-void	error_message(const char *msg)
-{
-	printf("Error\n%s\n", msg);
+	ft_putstr_fd("Error\n", 2);
+	if (str)
+		ft_putstr_fd(str, 2);
+	return (status);
 }
