@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 10:01:37 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/21 15:22:24 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:29:50 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,17 @@ void	init_game(t_game *game)
 	game->player.dir_y = 0;
 	game->has_floor_color = 0;
 	game->has_ceiling_color = 0;
-	game->screen_width = 0;
-	game->screen_height = 0;
 	game->key.go_backward = 0;
 	game->key.go_forward = 0;
 	game->key.go_left = 0;
 	game->key.go_right = 0;
 	game->key.turn_left = 0;
 	game->key.turn_right = 0;
+	game->last_time = 0;
+	game->delta_time = 0;
+	game->screen_height = WIN_HEIGHT;
+	game->screen_width = WIN_WIDTH;
+	init_img(&game->data.img);
 	init_textures(game);
 }
 
@@ -115,4 +118,16 @@ void	set_camera(t_player *player)
 		player->plane_x = 0;
 		player->plane_y = -0.66;
 	}
+}
+
+void init_mmap(t_game *game)
+{
+	game->mmap.cx = game->screen_width - MINIMAP_RADIUS - 20;
+    game->mmap.cy = MINIMAP_RADIUS + 20;
+    game->mmap.radius = MINIMAP_RADIUS;
+    game->mmap.scale = 10;
+    game->mmap.map_width = game->map_width;
+    game->mmap.map_height = game->map_height;
+	game->mmap.px = 0;
+	game->mmap.py = 0;
 }

@@ -79,31 +79,28 @@ all: $(OBJ_DIR) $(NAME)
 	@echo "       $(YELLOW)____$(BLUE)XXXXXX             XXXXXX$(YELLOW)____"
 	@echo "      /________/               \________\\ $(NC)"
 
-
+$(NAME): $(OBJ)
+	@printf "\r\033[K$(BLUE)⚙$(NC) Archiving libft $(NC)\r"
+	@$(AR) $(NAME) $(OBJ)
+	@printf "$(DARK_GREEN)✓ libft created! $(NC)\n"
 
 $(OBJ_DIR)/%.o: %.c Makefile
-	@echo "$(WHITE) mkdir -p $(dir $@) $(NC)"
 	@mkdir -p $(dir $@)
-	@echo "$(DARK_GREEN) $(CC) $(CFLAGS) -MMD -MP -o $@ -c $<$(NC)"
+	@printf "$(BLUE)⚙$(NC)  Compiling $(BLUE)%-50s$(NC)\r" "$<"
 	@$(CC) $(CFLAGS) -MMD -MP -o $@ -c $<
 
 
 -include $(DEPS)
 
-$(NAME): $(OBJ)
-	@echo "$(DARK_YELLOW) $(AR) $(NAME) $(OBJ) $(NC)"
-	@$(AR) $(NAME) $(OBJ)
-
 $(OBJ_DIR):
-	@echo "$(WHITE) mkdir -p $(OBJ_DIR) $(NC)"
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@echo "$(DARK_RED) $(RM) $(OBJ_DIR) $(NC)"
+	@echo "$(DARK_RED)🗑  Cleaning libft objects...$(NC)"
 	@$(RM) $(OBJ_DIR)
 
 fclean: clean
-	@echo "$(DARK_RED) rm -f $(NAME) $(NC)"
+	@echo "$(DARK_RED)🗑  Removing libft.a...$(NC)"
 	@rm -f $(NAME)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/23 11:53:22 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/26 16:27:45 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,18 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+# include <sys/time.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
 # include "../minilibx-linux/mlx.h"
+# define WIN_HEIGHT 1500
+# define WIN_WIDTH  2000
 # define MAP_HEIGHT 500
 # define MAP_WIDTH	500
-# define P_SPEED	1
+# define WALK_SPEED	2
+# define ROTATION_SPEED 2
+# define PI 3.14159265359
+# define MINIMAP_RADIUS 80
 
 
 typedef struct s_color
@@ -68,6 +74,7 @@ typedef struct s_key
 
 typedef struct	s_player
 {
+	double		direction;
 	double		pos_x;
 	double		pos_y;
 	double		dir_x;
@@ -81,8 +88,7 @@ typedef struct	s_data
 {
 	void		*mlx_ptr;
 	void		*win_ptr;
-	int			width;
-	int			height;
+	t_img		img;
 }				t_data;
 
 typedef struct s_ray
@@ -110,6 +116,18 @@ typedef struct s_ray
 	int			side;
 }				t_ray;
 
+typedef struct s_minimap
+{
+	int	cx;
+	int	cy;
+	int	radius;
+	int	scale;
+	int	map_width;
+	int	map_height;
+	int	px;
+	int	py;
+}	t_minimap;
+
 typedef struct s_game
 {
 	t_data		data;
@@ -122,6 +140,7 @@ typedef struct s_game
 	t_color		floor_color;
 	t_color		ceiling_color;
 	t_player	player;
+	t_minimap	mmap;
 	char		*path_north;
 	char		*path_south;
 	char		*path_east;
@@ -134,6 +153,8 @@ typedef struct s_game
 	int			has_ceiling_color;
 	int			screen_width;
 	int			screen_height;
+	int			last_time;
+	int			delta_time;
 }				t_game;
 
 /* Main parsing pipeline */
@@ -178,5 +199,18 @@ int				surrounding_is_filled(int row, int col, t_game *game);
 /* Parsing utilities */
 char			*skip_spaces(char *str);
 void			trim_end(char *str);
+
+/* Exec functions*/
+
+void	handle_rotation(t_game *game);
+void	handle_up_and_down(t_game *game);
+void	handle_right_and_left(t_game *game);
+double	calc_timeframe(t_game *game);
+void	draw_map(t_game *game);
+int		exec(t_game *game);
+void	draw_minimap_map(t_game *game);
+void	draw_minimap_compass(t_game *game);
+void	put_pixel(t_game *game, int x, int y, unsigned int color);
+void	init_mmap(t_game *game);
 
 #endif
