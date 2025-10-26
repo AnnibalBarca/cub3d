@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/26 16:27:45 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/26 18:46:34 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,8 +153,8 @@ typedef struct s_game
 	int			has_ceiling_color;
 	int			screen_width;
 	int			screen_height;
-	int			last_time;
-	int			delta_time;
+	double		last_time;
+	double		delta_time;
 }				t_game;
 
 /* Main parsing pipeline */
@@ -208,7 +208,7 @@ void	handle_right_and_left(t_game *game);
 double	calc_timeframe(t_game *game);
 void	draw_map(t_game *game);
 int		exec(t_game *game);
-void	draw_minimap_map(t_game *game);
+void	draw_minimap(t_game *game);
 void	draw_minimap_compass(t_game *game);
 void	put_pixel(t_game *game, int x, int y, unsigned int color);
 void	init_mmap(t_game *game);

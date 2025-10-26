@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 20:47:39 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/25 21:59:48 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/26 18:46:28 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ void	draw_minimap_cells(t_game *game)
 	}
 }
 
-void	draw_minimap_map(t_game *game)
+void	draw_minimap(t_game *game)
 {
 	draw_minimap_cells(game);
 	draw_minimap_player(game);

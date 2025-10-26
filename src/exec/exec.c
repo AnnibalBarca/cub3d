@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 18:41:58 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/26 16:25:14 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/26 18:46:39 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,11 @@ int	handle_keyrelease(int keysym, t_game *game)
 int	render(t_game *game)
 {
     calc_timeframe(game);
-	draw_map(game);
     handle_rotation(game);
     handle_right_and_left(game);
     handle_up_and_down(game);
-    draw_minimap_map(game);
+	draw_map(game);
+    draw_minimap(game);
     mlx_put_image_to_window(game->data.mlx_ptr, game->data.win_ptr,
         game->data.img.mlx_img, 0, 0);
     draw_minimap_compass(game);

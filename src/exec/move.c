@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:27:04 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/26 16:27:23 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/26 18:42:26 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,15 @@
 
 void	move_player(t_game *game, double delta_x, double delta_y)
 {
-    double	nx;
-    double	ny;
-    int		map_x;
-    int		map_y;
+	double	nx;
+	double	ny;
 
-    nx = game->player.pos_x + delta_x;
-    ny = game->player.pos_y + delta_y;
-    map_x = (int)nx;
-    map_y = (int)ny;
-
-    if (map_y >= 0 && map_y < game->map_height && map_x >= 0 && map_x < game->map_width)
-    {
-        if (game->map[map_y][map_x] != '1')
-        {
-            game->player.pos_x = nx;
-            game->player.pos_y = ny;
-        }
-    }
+	nx = game->player.pos_x + delta_x;
+	ny = game->player.pos_y + delta_y;
+	if (game->map[(int)game->player.pos_y][(int)nx] != '1')
+		game->player.pos_x = nx;
+	if (game->map[(int)ny][(int)game->player.pos_x] != '1')
+		game->player.pos_y = ny;
 }
 
 void	normalize_angle(double *angle)
@@ -61,7 +52,6 @@ void	handle_rotation(t_game *game)
 
 void	handle_up_and_down(t_game *game)
 {
-    double	angle_rad;
     double	speed;
     double	dx;
     double	dy;
@@ -69,26 +59,24 @@ void	handle_up_and_down(t_game *game)
     if (game->delta_time <= 0.0f)
         return ;
 
-    angle_rad = game->player.direction * PI / 180.0;
     speed = WALK_SPEED * game->delta_time;
 
     if (game->key.go_forward)
     {
-        dx = cos(angle_rad) * speed;
-        dy = sin(angle_rad) * speed;
+        dx = game->player.dir_x * speed;
+        dy = game->player.dir_y * speed;
         move_player(game, dx, dy);
     }
     if (game->key.go_backward)
     {
-        dx = -cos(angle_rad) * speed;
-        dy = -sin(angle_rad) * speed;
+        dx = -game->player.dir_x * speed;
+        dy = -game->player.dir_y * speed;
         move_player(game, dx, dy);
     }
 }
 
 void	handle_right_and_left(t_game *game)
 {
-    double	angle_rad;
     double	speed;
     double	dx;
     double	dy;
@@ -96,19 +84,18 @@ void	handle_right_and_left(t_game *game)
     if (game->delta_time <= 0.0f)
         return ;
 
-    angle_rad = game->player.direction * PI / 180.0;
     speed = WALK_SPEED * game->delta_time;
 
     if (game->key.go_right)
     {
-        dx = cos(angle_rad + PI / 2) * speed;
-        dy = sin(angle_rad + PI / 2) * speed;
+        dx = -game->player.dir_y * speed;
+        dy = game->player.dir_x * speed;
         move_player(game, dx, dy);
     }
     if (game->key.go_left)
     {
-        dx = cos(angle_rad - PI / 2) * speed;
-        dy = sin(angle_rad - PI / 2) * speed;
+        dx = game->player.dir_y * speed;
+        dy = -game->player.dir_x * speed;
         move_player(game, dx, dy);
     }
 }
