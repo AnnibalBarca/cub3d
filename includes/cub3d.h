@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/26 18:46:34 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/27 14:49:05 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <unistd.h>
+#include <float.h>
 # include <sys/time.h>
 # include <X11/X.h>
 # include <X11/keysym.h>
@@ -114,6 +115,7 @@ typedef struct s_ray
 	int			tex_x;
 	int			tex_y;
 	int			side;
+	int			iter_limit;
 }				t_ray;
 
 typedef struct s_minimap
