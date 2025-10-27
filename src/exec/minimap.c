@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 20:47:39 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/27 17:47:42 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:26:10 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	get_minimap_cell_color(t_game *game, char c)
 	int	r;
 	int	g;
 	int	b;
+
 	if (c == '1')
 	{
 		r = game->ceiling_color.r;
@@ -51,16 +52,7 @@ void	draw_one_minimap_cell(t_game *game, int x, int y)
 	if (pixel_x < 0 || pixel_x >= game->screen_width || pixel_y < 0
 		|| pixel_y >= game->screen_height)
 		return ;
-	if (map_y < 0 || map_y >= game->map_height || map_x < 0
-		|| map_x >= game->map_width)
-	{
-		put_pixel(game, pixel_x, pixel_y, 0x000000);
-		return ;
-	}
-	if (game->map[map_y][map_x])
-		color = get_minimap_cell_color(game, game->map[map_y][map_x]);
-	else
-		color = 0x000000;
+	color = get_minimap_cell_color(game, get_char_at(game, map_y, map_x));
 	put_pixel(game, pixel_x, pixel_y, color);
 }
 
@@ -115,31 +107,31 @@ void	draw_minimap_cells(t_game *game)
 
 void	draw_minimap_direction(t_game *game)
 {
-    int		i;
-    int		line_length;
-    int		pixel_x;
-    int		pixel_y;
+	int	i;
+	int	line_length;
+	int	pixel_x;
+	int	pixel_y;
 
-    line_length = 15;
-    i = 0;
-    while (i < line_length)
-    {
-        pixel_x = game->mmap.cx + (int)(game->player.dir_x * i);
-        pixel_y = game->mmap.cy + (int)(game->player.dir_y * i);
-        if (pixel_x >= 0 && pixel_x < game->screen_width
-            && pixel_y >= 0 && pixel_y < game->screen_height)
-        {
-            put_pixel(game, pixel_x, pixel_y, 0xFFFF00);
-        }
-        i++;
-    }
+	line_length = 15;
+	i = 0;
+	while (i < line_length)
+	{
+		pixel_x = game->mmap.cx + (int)(game->player.dir_x * i);
+		pixel_y = game->mmap.cy + (int)(game->player.dir_y * i);
+		if (pixel_x >= 0 && pixel_x < game->screen_width && pixel_y >= 0
+			&& pixel_y < game->screen_height)
+		{
+			put_pixel(game, pixel_x, pixel_y, 0xFFFF00);
+		}
+		i++;
+	}
 }
 
 void	draw_minimap(t_game *game)
 {
-    draw_minimap_cells(game);
-    draw_minimap_direction(game);
-    draw_minimap_player(game);
+	draw_minimap_cells(game);
+	draw_minimap_direction(game);
+	draw_minimap_player(game);
 }
 
 void	draw_minimap_compass(t_game *game)

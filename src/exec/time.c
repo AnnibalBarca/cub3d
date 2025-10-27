@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:18:35 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/23 15:20:10 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/27 18:26:32 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ double	get_time(void)
 
 double	calc_timeframe(t_game *game)
 {
-	double	now;
-	double	frame_time;
+	double now;
+	double frame_time;
 
 	now = get_time();
 	frame_time = (now - game->last_time) / 1000.0;
