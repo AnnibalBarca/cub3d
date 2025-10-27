@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/27 14:49:05 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/27 16:38:55 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -214,5 +214,9 @@ void	draw_minimap(t_game *game);
 void	draw_minimap_compass(t_game *game);
 void	put_pixel(t_game *game, int x, int y, unsigned int color);
 void	init_mmap(t_game *game);
+
+// DDA functions 
+int    dda_register_hit(t_ray *r);
+
 
 #endif
