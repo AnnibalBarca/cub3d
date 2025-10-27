@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/27 16:38:55 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:42:36 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define WIN_WIDTH  2000
 # define MAP_HEIGHT 500
 # define MAP_WIDTH	500
-# define WALK_SPEED	2
-# define ROTATION_SPEED 2
+# define WALK_SPEED	3
+# define ROTATION_SPEED 4
 # define PI 3.14159265359
 # define MINIMAP_RADIUS 80
 
@@ -75,7 +75,6 @@ typedef struct s_key
 
 typedef struct	s_player
 {
-	double		direction;
 	double		pos_x;
 	double		pos_y;
 	double		dir_x;
@@ -215,7 +214,7 @@ void	draw_minimap_compass(t_game *game);
 void	put_pixel(t_game *game, int x, int y, unsigned int color);
 void	init_mmap(t_game *game);
 
-// DDA functions 
+// DDA functions
 int    dda_register_hit(t_ray *r);
 
 

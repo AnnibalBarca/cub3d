@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:27:04 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/26 21:18:29 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:39:45 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,26 +25,47 @@ void	move_player(t_game *game, double delta_x, double delta_y)
 		game->player.pos_y = ny;
 }
 
-void	normalize_angle(double *angle)
+void	rotate_left(t_game *game, double rot_speed)
 {
-    while (*angle >= 360.0)
-        *angle -= 360.0;
-    while (*angle < 0.0)
-        *angle += 360.0;
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = game->player.dir_x;
+	game->player.dir_x = game->player.dir_x * cos(-rot_speed) - game->player.dir_y * sin(-rot_speed);
+	game->player.dir_y = old_dir_x * sin(-rot_speed) + game->player.dir_y * cos(-rot_speed);
+	old_plane_x = game->player.plane_x;
+	game->player.plane_x = game->player.plane_x * cos(-rot_speed) - game->player.plane_y
+		* sin(-rot_speed);
+	game->player.plane_y = old_plane_x * sin(-rot_speed) + game->player.plane_y
+		* cos(-rot_speed);
+}
+
+void	rotate_right(t_game *game, double rot_speed)
+{
+	double	old_dir_x;
+	double	old_plane_x;
+
+	old_dir_x = game->player.dir_x;
+	game->player.dir_x = game->player.dir_x * cos(rot_speed) - game->player.dir_y * sin(rot_speed);
+	game->player.dir_y = old_dir_x * sin(rot_speed) + game->player.dir_y * cos(rot_speed);
+	old_plane_x = game->player.plane_x;
+	game->player.plane_x = game->player.plane_x * cos(rot_speed) - game->player.plane_y
+		* sin(rot_speed);
+	game->player.plane_y = old_plane_x * sin(rot_speed) + game->player.plane_y
+		* cos(rot_speed);
 }
 
 void	handle_rotation(t_game *game)
 {
-    double	speed;
+	double	rot_speed;
 
-    if (game->delta_time <= 0.0f)
-        return ;
-    speed = ROTATION_SPEED * game->delta_time;
-    if (game->key.turn_right)
-        game->player.direction += speed;
-    if (game->key.turn_left)
-        game->player.direction -= speed;
-    normalize_angle(&game->player.direction);
+	if (game->delta_time <= 0.0f)
+		return ;
+	rot_speed = ROTATION_SPEED * game->delta_time;
+	if (game->key.turn_right)
+		rotate_right(game, rot_speed);
+	if (game->key.turn_left)
+		rotate_left(game, rot_speed);
 }
 
 void	handle_up_and_down(t_game *game)

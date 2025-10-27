@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:16:34 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/27 16:42:33 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:06:43 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,12 +66,13 @@ int	ft_dda(t_game *game, t_ray *r, int screen_x)
 		dda_side_dist_delta_calc(r, iter);
 		if (r->map_x < 0 || r->map_x >= game->map_width || r->map_y < 0
 			|| r->map_y >= game->map_height)
-			return (dda_register_hit);
+		{
+			r->hit = 1;
+			return (0);
+		}
 		cell = get_char_at(game, r->map_y, r->map_x);
-		if (cell == '1')
-			return (dda_register_hit);
-		if (cell == ' ')
-			return (dda_register_hit);
+		if (cell == '1' || cell == ' ')
+			r->hit = 1;
 	}
 	return (0);
 }

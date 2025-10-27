@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   dda_helpers.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 13:25:10 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/27 16:36:05 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/27 17:03:57 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ void	dda_compute_perp_distance(t_game *game, t_ray *r)
         dy = r->map_y - game->player.pos_y + (1 - r->step_y) / 2.0;
     else
         dy = r->map_y - game->player.pos_y + 0.5;
-    r->perp_dist = sqrt(dx * dx + dy * dy) * 
-                   fabs(r->raydir_x * dx + r->raydir_y * dy) / 
+    r->perp_dist = sqrt(dx * dx + dy * dy) *
+                   fabs(r->raydir_x * dx + r->raydir_y * dy) /
                    sqrt(r->raydir_x * r->raydir_x + r->raydir_y * r->raydir_y);
     if (r->perp_dist <= 0.0)
         r->perp_dist = 0.1;
@@ -54,8 +54,8 @@ void	dda_side_dist_delta_calc(t_ray *r, int iter)
 		r->side = 1;
 	}
 }
-int	dda_register_hit(t_ray *r)
-{
-	r->hit = 1;
-	return (0);
-}
+// int	dda_register_hit(t_ray *r)
+// {
+// 	r->hit = 1;
+// 	return (0);
+// }
