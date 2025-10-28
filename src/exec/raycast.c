@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 13:41:50 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/28 16:37:47 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/28 16:59:26 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ static void	dda_init_ray(t_game *game, t_ray *r, int screen_x)
 	double	camera_x;
 
 	camera_x = 2.0 * screen_x / (double)WIN_WIDTH - 1.0;
-	r->camera_x = camera_x;
 	r->raydir_x = game->player.dir_x + game->player.plane_x * camera_x;
 	r->raydir_y = game->player.dir_y + game->player.plane_y * camera_x;
 	r->map_x = (int)game->player.pos_x;
@@ -54,12 +53,14 @@ int	raycasting(t_game *game)
 	t_ray	*r;
 	int		x;
 
+	x = 0;
 	while (x < WIN_WIDTH)
 	{
-		dda_init_ray(game, r, x);
-		ft_dda(game, r, x);
-		calc_line_height(game, r);
-		// update_texture_pixels;
+		dda_init_ray(game, &r, x);
+		ft_dda(game, &r, x);
+		calc_line_height(game, &r);
+		// update_texture_pixels(game, &r, x);
 		x++;
 	}
+	return (0);
 }

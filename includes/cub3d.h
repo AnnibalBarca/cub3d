@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/28 16:33:16 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/28 16:59:05 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,8 +94,6 @@ typedef struct s_ray
 {
 	double		raydir_x;
 	double		raydir_y;
-	double		angle;
-	double		camera_x;
 	double		delta_distx;
 	//
 	double		delta_disty;
@@ -117,8 +115,6 @@ typedef struct s_ray
 	// commencer ici le dessin du mur
 	double		draw_end;
 	// finir ici le dessin du mur
-	int			tex_x;
-	int			tex_y;
 	int			side;
 	// quel mur a ete touche : 0 vertical 1 horizontal
 	int			iter_limit;
@@ -221,6 +217,6 @@ void			init_mmap(t_game *game);
 
 // raycasting functions
 int				ft_dda(t_game *game, t_ray *r, int screen_x);
-int	raycasting(t_game *game)
+int				raycasting(t_game *game);
 
 #endif

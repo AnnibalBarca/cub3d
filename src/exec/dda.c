@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:16:34 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/28 16:33:21 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/28 16:59:52 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,6 @@ static void	dda_iter_limit(t_game *game, t_ray *r)
 	r->iter_limit = (game->map_width + game->map_height) * 4;
 	if (r->iter_limit < 1024)
 		r->iter_limit = 1024;
-}
-
-static void	dda_compute_perp_distance(t_game *game, t_ray *r)
-{
-	double dx, dy;
-	if (r->side == 0)
-		dx = r->map_x - game->player.pos_x + (1 - r->step_x) / 2.0;
-	else
-		dx = r->map_x - game->player.pos_x + 0.5;
-	if (r->side == 1)
-		dy = r->map_y - game->player.pos_y + (1 - r->step_y) / 2.0;
-	else
-		dy = r->map_y - game->player.pos_y + 0.5;
-	r->perp_dist = sqrt(dx * dx + dy * dy) * fabs(r->raydir_x * dx + r->raydir_y
-			* dy) / sqrt(r->raydir_x * r->raydir_x + r->raydir_y * r->raydir_y);
-	if (r->perp_dist <= 0.0)
-		r->perp_dist = 0.1;
 }
 
 static void	dda_side_dist_delta_calc(t_ray *r, int iter)
@@ -80,7 +63,6 @@ int	ft_dda(t_game *game, t_ray *r, int screen_x)
 	int		iter;
 	char	cell;
 
-	dda_init_ray(game, r, screen_x);
 	iter = 0;
 	while (!r->hit && iter++ < r->iter_limit)
 	{
