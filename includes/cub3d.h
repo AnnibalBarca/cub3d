@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/28 15:26:00 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:30:09 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,9 @@ typedef struct s_ray
 	// nombre de pixels du mur en hauteur !! A utiliser pour textures
 	double		wall_x;
 	double		draw_start;
+	// commencer ici le dessin du mur
 	double		draw_end;
+	// finir ici le dessin du mur
 	int			tex_x;
 	int			tex_y;
 	int			side;
