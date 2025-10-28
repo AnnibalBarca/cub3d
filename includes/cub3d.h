@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/27 17:42:36 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/28 15:26:00 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ typedef struct	s_data
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		img;
-}				t_data;
+}				t_data; 
 
 typedef struct s_ray
 {
@@ -98,22 +98,28 @@ typedef struct s_ray
 	double		angle;
 	double		camera_x;
 	double		delta_distx;
+	// 
 	double		delta_disty;
 	int			map_x;
 	int			map_y;
 	int			step_x;
 	int			step_y;
 	double		side_disty;
+	//distance taversee sur l'axe Y pour atteindre le mur
 	double		side_distx;
+	//distance taversee sur l'axe X pour atteindre le mur
 	int			hit;
 	double		perp_dist;
+	// distance perpendiculaire entre le joueur et le mur
 	double		line_height;
+	// nombre de pixels du mur en hauteur !! A utiliser pour textures
 	double		wall_x;
 	double		draw_start;
 	double		draw_end;
 	int			tex_x;
 	int			tex_y;
 	int			side;
+	//quel mur a ete touche : 0 vertical 1 horizontal
 	int			iter_limit;
 }				t_ray;
 
