@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/25 21:31:18 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:15:38 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	parse_cub_file(t_game *game, char *filename)
 	int	fd;
 
 	if (ft_strlen(filename) < 5 || ft_strncmp(&filename[ft_strlen(filename)
-				- 4], ".cub", 4) != 0)
+		- 4], ".cub", 4) != 0)
 		return (print_e("Invalid file extension (expected .cub)\n", 0));
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
@@ -59,7 +59,7 @@ int	parse_cub_file(t_game *game, char *filename)
 	if (!validate_required_elements(game))
 	{
 		close(fd);
-		return(print_e("Missing required elements (NO/SO/WE/EA/F/C)\n", 2), 0);
+		return (print_e("Missing required elements (NO/SO/WE/EA/F/C)\n", 2), 0);
 	}
 	if (!parse_map(game, fd))
 	{

@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 10:01:37 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/27 17:13:06 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:09:07 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,6 @@ void	set_vector(t_player *player)
 	{
 		player->dir_x = 0;
 		player->dir_y = -1;
-
 	}
 	else if (player->player_letter == 'S')
 	{
@@ -87,7 +86,6 @@ void	set_vector(t_player *player)
 	{
 		player->dir_x = 1;
 		player->dir_y = 0;
-
 	}
 	else if (player->player_letter == 'W')
 	{
@@ -120,14 +118,14 @@ void	set_camera(t_player *player)
 	}
 }
 
-void init_mmap(t_game *game)
+void	init_mmap(t_game *game)
 {
 	game->mmap.cx = game->screen_width - MINIMAP_RADIUS - 20;
-    game->mmap.cy = MINIMAP_RADIUS + 20;
-    game->mmap.radius = MINIMAP_RADIUS;
-    game->mmap.scale = 10;
-    game->mmap.map_width = game->map_width;
-    game->mmap.map_height = game->map_height;
+	game->mmap.cy = MINIMAP_RADIUS + 20;
+	game->mmap.radius = MINIMAP_RADIUS;
+	game->mmap.scale = 10;
+	game->mmap.map_width = game->map_width;
+	game->mmap.map_height = game->map_height;
 	game->mmap.px = 0;
 	game->mmap.py = 0;
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:04:26 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/29 07:48:10 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:09:56 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,4 +46,23 @@ int	load_textures(t_game *game)
 	if (load_texture(&game->data, &game->textures[EAST], game->path_east))
 		return (print_e("Failed to load East text\n", 1));
 	return (0);
+}
+
+t_img	*get_texture(t_game *game)
+{
+	if (game->raycast.side == 0)
+	{
+		if (game->raycast.raydir_x > 0)
+			return (&game->textures[3]);
+		else
+			return (&game->textures[2]);
+	}
+	else
+	{
+		if (game->raycast.raydir_y > 0)
+			return (&game->textures[1]);
+		else
+			return (&game->textures[0]);
+	}
+	return (NULL);
 }

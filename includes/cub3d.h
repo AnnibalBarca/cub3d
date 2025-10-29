@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/28 16:59:05 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:15:44 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,8 @@
 # define WIN_WIDTH 2000
 # define MAP_HEIGHT 500
 # define MAP_WIDTH 500
-# define WALK_SPEED 3
-# define ROTATION_SPEED 4
+# define WALK_SPEED 6
+# define ROTATION_SPEED 6
 # define PI 3.14159265359
 # define MINIMAP_RADIUS 80
 
@@ -117,6 +117,8 @@ typedef struct s_ray
 	// finir ici le dessin du mur
 	int			side;
 	// quel mur a ete touche : 0 vertical 1 horizontal
+	int			tex_x;
+	int			tex_y;
 	int			iter_limit;
 }				t_ray;
 
@@ -208,15 +210,24 @@ void			handle_rotation(t_game *game);
 void			handle_up_and_down(t_game *game);
 void			handle_right_and_left(t_game *game);
 double			calc_timeframe(t_game *game);
-void			draw_map(t_game *game);
 int				exec(t_game *game);
 void			draw_minimap(t_game *game);
 void			draw_minimap_compass(t_game *game);
 void			put_pixel(t_game *game, int x, int y, unsigned int color);
 void			init_mmap(t_game *game);
+void			draw_floor(t_game *game);
+void			draw_wall(t_game *game);
 
 // raycasting functions
-int				ft_dda(t_game *game, t_ray *r, int screen_x);
+int				ft_dda(t_game *game);
 int				raycasting(t_game *game);
+void			dda_iter_limit(t_game *game);
+void			dda_side_dist_delta_calc(t_game *game);
+void			dda_side_dist_delta_init(t_game *game);
+void			set_wall_pixel(t_game *game);
+void			set_texture(t_game *game);
+void			draw_texture(t_game *game, int x);
+t_img			*get_texture(t_game *game);
+int				load_textures(t_game *game);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/23 15:37:09 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:08:58 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ static int	parse_texture_identifier(char *line, t_game *game)
 	path = skip_spaces(id + 2);
 	trim_end(path);
 	if (ft_strlen(path) == 0)
-		return(print_e("Empty texture path", 0));
+		return (print_e("Empty texture path", 0));
 	if (!store_texture(game, path, tex_type))
 		return (0);
 	return (1);

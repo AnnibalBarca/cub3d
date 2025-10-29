@@ -3,39 +3,43 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:16:34 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/28 16:59:52 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:06:44 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static void	dda_iter_limit(t_game *game, t_ray *r)
+void	dda_iter_limit(t_game *game)
 {
-	r->iter_limit = (game->map_width + game->map_height) * 4;
-	if (r->iter_limit < 1024)
-		r->iter_limit = 1024;
+	game->raycast.iter_limit = (game->map_width + game->map_height) * 4;
+	if (game->raycast.iter_limit < 1024)
+		game->raycast.iter_limit = 1024;
 }
 
-static void	dda_side_dist_delta_calc(t_ray *r, int iter)
+void	dda_side_dist_delta_calc(t_game *game)
 {
-	if (r->side_distx < r->side_disty)
+	if (game->raycast.side_distx < game->raycast.side_disty)
 	{
-		r->side_distx += r->delta_distx;
-		r->map_x += r->step_x;
-		r->side = 0;
+		game->raycast.side_distx += game->raycast.delta_distx;
+		game->raycast.map_x += game->raycast.step_x;
+		game->raycast.side = 0;
 	}
 	else
 	{
-		r->side_disty += r->delta_disty;
-		r->map_y += r->step_y;
-		r->side = 1;
+		game->raycast.side_disty += game->raycast.delta_disty;
+		game->raycast.map_y += game->raycast.step_y;
+		game->raycast.side = 1;
 	}
 }
-static void	dda_side_dist_delta_init(t_game *game, t_ray *r)
+
+void	dda_side_dist_delta_init(t_game *game)
 {
+	t_ray	*r;
+
+	r = &game->raycast;
 	if (r->raydir_x < 0.0)
 	{
 		r->step_x = -1;
@@ -58,15 +62,28 @@ static void	dda_side_dist_delta_init(t_game *game, t_ray *r)
 	}
 }
 
-int	ft_dda(t_game *game, t_ray *r, int screen_x)
+int	ft_dda(t_game *game)
 {
 	int		iter;
 	char	cell;
+	t_ray	*r;
 
+	r = &game->raycast;
 	iter = 0;
 	while (!r->hit && iter++ < r->iter_limit)
 	{
-		dda_side_dist_delta_calc(r, iter);
+		if (r->side_distx < r->side_disty)
+		{
+			r->side_distx += r->delta_distx;
+			r->map_x += r->step_x;
+			r->side = 0;
+		}
+		else
+		{
+			r->side_disty += r->delta_disty;
+			r->map_y += r->step_y;
+			r->side = 1;
+		}
 		if (r->map_x < 0 || r->map_x >= game->map_width || r->map_y < 0
 			|| r->map_y >= game->map_height)
 		{

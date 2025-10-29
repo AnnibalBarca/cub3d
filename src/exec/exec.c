@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 18:41:58 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/27 18:25:53 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/29 19:15:29 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,8 @@ int	render(t_game *game)
 	handle_rotation(game);
 	handle_right_and_left(game);
 	handle_up_and_down(game);
+	draw_floor(game);
+	raycasting(game);
 	draw_minimap(game);
 	mlx_put_image_to_window(game->data.mlx_ptr, game->data.win_ptr,
 		game->data.img.mlx_img, 0, 0);
@@ -92,6 +94,15 @@ int	exec(t_game *game)
 	game->data.img.addr = mlx_get_data_addr(game->data.img.mlx_img,
 			&game->data.img.bpp, &game->data.img.line_len,
 			&game->data.img.endian);
+	if (load_textures(game))
+	{
+		printf("Failed to load textures\n");
+		mlx_destroy_image(game->data.mlx_ptr, game->data.img.mlx_img);
+		mlx_destroy_window(game->data.mlx_ptr, game->data.win_ptr);
+		mlx_destroy_display(game->data.mlx_ptr);
+		free(game->data.mlx_ptr);
+		return (1);
+	}
 	mlx_loop_hook(game->data.mlx_ptr, &render, game);
 	mlx_hook(game->data.win_ptr, KeyPress, KeyPressMask, &handle_keypress,
 		game);

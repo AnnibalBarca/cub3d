@@ -11,6 +11,9 @@ SRC_ALL =	$(SRC_DIR)/main.c	\
             $(SRC_DIR)/exec/time.c	\
             $(SRC_DIR)/exec/exec.c	\
             $(SRC_DIR)/exec/minimap.c	\
+            $(SRC_DIR)/exec/raycast.c	\
+            $(SRC_DIR)/exec/dda.c	\
+            $(SRC_DIR)/exec/texture.c	\
             $(SRC_DIR)/utils/init.c \
             $(SRC_DIR)/utils/error.c \
             $(SRC_DIR)/parsing/parse_textures.c \
@@ -42,7 +45,7 @@ all: $(LIBFT) $(MLX) $(OBJ_DIR) $(NAME)
 
 $(NAME): $(OBJ)
 	@printf "\r\033[K$(GREEN)✓ Linking $(CYAN)$(NAME)$(RST)\r"
-	@printf "$(GREEN)✓ cub3d created!$(NC)\n"
+	@printf "$(GREEN)✓ cub3d created!$(NC)$(RST)\n"
 	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LDFLAGS)
 	@printf "$(BLUE)╔════════════════════════════════════════╗$(RST)\n"
 	@printf "$(BLUE)║$(RST)        $(GREEN)✓ COMPILATION SUCCESS! ✓$(RST)        $(BLUE)║$(RST)\n"
