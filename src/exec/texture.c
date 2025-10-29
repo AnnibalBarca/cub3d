@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:04:26 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/27 18:26:21 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/29 07:48:10 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ int	load_textures(t_game *game)
 	if (!game || !game->has_tex_ea || !game->has_tex_no || !game->has_tex_so
 		|| !game->has_tex_we)
 		return (print_e("NULL game or incomplete textures\n", 1));
-	if (load_texture(game, &game->textures[0], game->path_north))
+	if (load_texture(&game->data, &game->textures[NORTH], game->path_north))
 		return (print_e("Failed to load North text.\n", 1));
-	if (load_texture(game, &game->textures[1], game->path_south))
+	if (load_texture(&game->data, &game->textures[SOUTH], game->path_south))
 		return (print_e("Failed to load South text.\n", 1));
-	if (load_texture(game, &game->textures[2], game->path_west))
+	if (load_texture(&game->data, &game->textures[WEST], game->path_west))
 		return (print_e("Failed to load West text.\n", 1));
-	if (load_texture(game, &game->textures[3], game->path_east))
+	if (load_texture(&game->data, &game->textures[EAST], game->path_east))
 		return (print_e("Failed to load East text\n", 1));
 	return (0);
 }
