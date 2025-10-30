@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   texture_parsing_helpers.c                          :+:      :+:    :+:   */
+/*   parsing_helpers.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:59:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/13 15:44:30 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:40:17 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,24 @@ void	trim_end(char *str)
 		str[len - 1] = '\0';
 		len--;
 	}
+}
+
+char	*ft_strappend(char *s1, char *s2)
+{
+	char	*str;
+
+	if (!s1 || !s2)
+		return (NULL);
+	str = ft_calloc(ft_strlen(s1) + ft_strlen(s2) + 1, sizeof(char));
+	if (!str)
+	{
+		free(s1);
+		free(s2);
+		return (NULL);
+	}
+	ft_strlcpy(str, s1, ft_strlen(s1) + 1);
+	ft_strlcat(str, s2, ft_strlen(s1) + ft_strlen(s2) + 1);
+	free(s1);
+	free(s2);
+	return (str);
 }

@@ -3,26 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/29 19:08:58 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:32:47 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	store_texture(t_game *game, char *path, e_texture tex_type)
+void	attribute_texture(t_game *game, char *dup, e_texture tex_type)
 {
-	char	*dup;
-	int		fd;
-
-	fd = open(path, O_RDONLY);
-	if (fd < 0)
-		return (print_e("Texture file does not exist or cannot be opened\n", 0));
-	dup = ft_strdup(path);
-	if (!dup)
-		return (print_e("Memory allocation failed\n", 0));
 	if (tex_type == NORTH)
 	{
 		game->path_north = dup;
@@ -43,6 +34,21 @@ static int	store_texture(t_game *game, char *path, e_texture tex_type)
 		game->path_east = dup;
 		game->has_tex_ea = 1;
 	}
+}
+
+static int	store_texture(t_game *game, char *path, e_texture tex_type)
+{
+	char	*dup;
+	int		fd;
+
+	fd = open(path, O_RDONLY);
+	if (fd < 0)
+		return (print_e("Texture file does not exist or cannot be opened\n",
+				0));
+	dup = ft_strdup(path);
+	if (!dup)
+		return (print_e("Memory allocation failed\n", 0));
+	attribute_texture(game, dup, tex_type);
 	return (1);
 }
 
@@ -88,7 +94,7 @@ int	parse_textures(t_game *game, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return(print_e("Unexpected EOF while parsing textures", 0));
+			return (print_e("Unexpected EOF while parsing textures", 0));
 		if (ft_strlen(line) == 0 || line[0] == '\n')
 		{
 			free(line);

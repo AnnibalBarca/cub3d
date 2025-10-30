@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:03:45 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/23 15:36:07 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:40:01 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	parse_rgb(char *rgb_str, t_color *color)
 	free(split[2]);
 	free(split);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return(print_e("RGB values must be in range [0,255]", 0));
+		return (print_e("RGB values must be in range [0,255]", 0));
 	color->r = r;
 	color->g = g;
 	color->b = b;
@@ -87,11 +87,36 @@ static int	parse_color_identifier(char *line, t_game *game)
 	return (1);
 }
 
+static int	handle_color_line(char *line, t_game *game, int *found)
+{
+	int	error;
+
+	if (ft_strlen(line) == 0 || line[0] == '\n')
+	{
+		free(line);
+		return (1);
+	}
+	error = parse_color_identifier(line, game);
+	if (error == 1)
+	{
+		(*found)++;
+		free(line);
+		return (1);
+	}
+	if (error == -1)
+	{
+		free(line);
+		return (0);
+	}
+	free(line);
+	return (2);
+}
+
 int	parse_colors(t_game *game, int fd)
 {
 	char	*line;
 	int		found;
-	int		error;
+	int		ret;
 
 	found = 0;
 	while (found < 2)
@@ -99,22 +124,11 @@ int	parse_colors(t_game *game, int fd)
 		line = get_next_line(fd);
 		if (!line)
 			return (print_e("Unexpected EOF while parsing colors", 0));
-		if (ft_strlen(line) == 0 || line[0] == '\n')
-		{
-			free(line);
-			continue ;
-		}
-		error = parse_color_identifier(line, game);
-		if (error == 1)
-			found++;
-		else if (error == -1)
+		ret = handle_color_line(line, game, &found);
+		if (ret == 0)
 			return (0);
-		else
-		{
-			free(line);
+		if (ret == 2)
 			break ;
-		}
-		free(line);
 	}
 	return (1);
 }
