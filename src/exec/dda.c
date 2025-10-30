@@ -3,14 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   dda.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/27 14:16:34 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/29 19:06:44 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 19:24:35 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+void	dda_loop_alg(t_ray *r)
+{
+	if (r->side_distx < r->side_disty)
+	{
+		r->side_distx += r->delta_distx;
+		r->map_x += r->step_x;
+		r->side = 0;
+	}
+	else
+	{
+		r->side_disty += r->delta_disty;
+		r->map_y += r->step_y;
+		r->side = 1;
+	}
+}
 
 void	dda_iter_limit(t_game *game)
 {
@@ -72,18 +88,7 @@ int	ft_dda(t_game *game)
 	iter = 0;
 	while (!r->hit && iter++ < r->iter_limit)
 	{
-		if (r->side_distx < r->side_disty)
-		{
-			r->side_distx += r->delta_distx;
-			r->map_x += r->step_x;
-			r->side = 0;
-		}
-		else
-		{
-			r->side_disty += r->delta_disty;
-			r->map_y += r->step_y;
-			r->side = 1;
-		}
+		dda_loop_alg(r);
 		if (r->map_x < 0 || r->map_x >= game->map_width || r->map_y < 0
 			|| r->map_y >= game->map_height)
 		{

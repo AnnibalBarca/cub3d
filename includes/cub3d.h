@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/29 19:15:44 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 20:01:20 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,23 +163,18 @@ typedef struct s_game
 	double		delta_time;
 }				t_game;
 
-/* Main parsing pipeline */
+// Parsing
 int				parse_cub_file(t_game *game, char *filename);
 void			free_game(t_game *game);
+int				parse_textures(t_game *game, int fd);
+int				parse_colors(t_game *game, int fd);
+int				parse_map(t_game *game, int fd);
+char			*ft_strappend(char *s1, char *s2);
 
 /* Init functions */
 void			init_game(t_game *game);
 void			set_vector(t_player *player);
 void			set_camera(t_player *player);
-
-/* Phase 1: Parse textures (NO, SO, WE, EA) */
-int				parse_textures(t_game *game, int fd);
-
-/* Phase 2: Parse colors (F, C) */
-int				parse_colors(t_game *game, int fd);
-
-/* Phase 3: Parse map from fd (uses map_parsing.c) */
-int				parse_map(t_game *game, int fd);
 
 /* Helper: Check if all required elements are present */
 int				validate_required_elements(t_game *game);
@@ -211,12 +206,15 @@ void			handle_up_and_down(t_game *game);
 void			handle_right_and_left(t_game *game);
 double			calc_timeframe(t_game *game);
 int				exec(t_game *game);
-void			draw_minimap(t_game *game);
+// void			draw_minimap(t_game *game);
 void			draw_minimap_compass(t_game *game);
 void			put_pixel(t_game *game, int x, int y, unsigned int color);
 void			init_mmap(t_game *game);
-void			draw_floor(t_game *game);
+void			draw_floor(t_game *game, int x, int y, unsigned int ceiling,
+					unsigned int floor_col);
 void			draw_wall(t_game *game);
+int				handle_keypress(int keysym, t_game *game);
+int				handle_keyrelease(int keysym, t_game *game);
 
 // raycasting functions
 int				ft_dda(t_game *game);
@@ -229,5 +227,9 @@ void			set_texture(t_game *game);
 void			draw_texture(t_game *game, int x);
 t_img			*get_texture(t_game *game);
 int				load_textures(t_game *game);
+
+void			cleanup_all(t_game *game);
+int				t_color_to_int(t_color color);
+int				close_win(t_game *game);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/21 13:41:50 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/29 19:06:38 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 17:31:43 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,9 @@ static void	dda_init_ray(t_game *game, int screen_x)
 	game->raycast.hit = 0;
 	game->raycast.side = 0;
 }
-static void	calc_line_height(t_game *game)
-{
-	t_img	*texture;
 
+static void	calc_wall_distance(t_game *game)
+{
 	if (game->raycast.side == 0)
 		game->raycast.perp_dist = (game->raycast.side_distx
 				- game->raycast.delta_distx);
@@ -50,6 +49,12 @@ static void	calc_line_height(t_game *game)
 		/ 2;
 	if (game->raycast.draw_end >= game->screen_height)
 		game->raycast.draw_end = game->screen_height - 1;
+}
+
+static void	calc_texture_x(t_game *game)
+{
+	t_img	*texture;
+
 	if (game->raycast.side == 0)
 		game->raycast.wall_x = game->player.pos_y + game->raycast.perp_dist
 			* game->raycast.raydir_y;
@@ -69,6 +74,12 @@ static void	calc_line_height(t_game *game)
 		game->raycast.tex_x = 0;
 	if (game->raycast.tex_x >= texture->w)
 		game->raycast.tex_x = texture->w - 1;
+}
+
+static void	calc_line_height(t_game *game)
+{
+	calc_wall_distance(game);
+	calc_texture_x(game);
 }
 
 int	raycasting(t_game *game)

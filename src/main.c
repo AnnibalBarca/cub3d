@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/29 19:15:38 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 16:00:20 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,16 +36,8 @@ void	free_game(t_game *game)
 	}
 }
 
-int	parse_cub_file(t_game *game, char *filename)
+static int	parse_input(t_game *game, int fd)
 {
-	int	fd;
-
-	if (ft_strlen(filename) < 5 || ft_strncmp(&filename[ft_strlen(filename)
-		- 4], ".cub", 4) != 0)
-		return (print_e("Invalid file extension (expected .cub)\n", 0));
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (print_e("Failed to open file\n", 0));
 	if (!parse_textures(game, fd))
 	{
 		close(fd);
@@ -66,7 +58,21 @@ int	parse_cub_file(t_game *game, char *filename)
 		close(fd);
 		return (0);
 	}
-	close(fd);
+	return (0);
+}
+
+int	parse_cub_file(t_game *game, char *filename)
+{
+	int	fd;
+
+	if (ft_strlen(filename) < 5 || ft_strncmp(&filename[ft_strlen(filename)
+				- 4], ".cub", 4) != 0)
+		return (print_e("Invalid file extension (expected .cub)\n", 0));
+	fd = open(filename, O_RDONLY);
+	if (fd < 0)
+		return (print_e("Failed to open file\n", 0));
+	if (!parse_input(game, fd))
+		close(fd);
 	return (1);
 }
 

@@ -16,12 +16,15 @@ SRC_ALL =	$(SRC_DIR)/main.c	\
             $(SRC_DIR)/exec/texture.c	\
             $(SRC_DIR)/utils/init.c \
             $(SRC_DIR)/utils/error.c \
+			$(SRC_DIR)/utils/input.c \
+            $(SRC_DIR)/utils/cleanup.c \
             $(SRC_DIR)/parsing/parse_textures.c \
             $(SRC_DIR)/parsing/parse_colors.c \
-            $(SRC_DIR)/parsing/texture_parsing_helpers.c \
+            $(SRC_DIR)/parsing/parsing_helpers.c \
             $(SRC_DIR)/parsing/map_parsing.c \
             $(SRC_DIR)/parsing/env_char_checking.c \
             $(SRC_DIR)/parsing/map_checking.c
+
 
 OBJ = $(addprefix $(OBJ_DIR)/, $(SRC_ALL:.c=.o))
 DEPS = $(OBJ:.o=.d)

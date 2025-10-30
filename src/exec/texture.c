@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   texture.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:04:26 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/29 19:09:56 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 20:10:37 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,49 @@ t_img	*get_texture(t_game *game)
 			return (&game->textures[0]);
 	}
 	return (NULL);
+}
+
+void	set_texture(t_game *game)
+{
+	t_img	*texture;
+
+	texture = get_texture(game);
+	if (!texture)
+		return ;
+	game->raycast.tex_x = (int)(game->raycast.wall_x * texture->w);
+	if (game->raycast.side == 0 && game->raycast.raydir_x > 0)
+		game->raycast.tex_x = texture->w - game->raycast.tex_x - 1;
+	if (game->raycast.side == 1 && game->raycast.raydir_y < 0)
+		game->raycast.tex_x = texture->w - game->raycast.tex_x - 1;
+	if (game->raycast.tex_x < 0)
+		game->raycast.tex_x = 0;
+	if (game->raycast.tex_x >= texture->w)
+		game->raycast.tex_x = texture->w - 1;
+}
+
+void	draw_texture(t_game *game, int x)
+{
+	t_img			*texture;
+	double			step;
+	double			texture_pos;
+	unsigned int	color;
+	int				y;
+
+	texture = get_texture(game);
+	if (!texture || !texture->addr || !texture->mlx_img)
+		return ;
+	step = 1.0 * (double)texture->h / (double)game->raycast.line_height;
+	texture_pos = (game->raycast.draw_start - (WIN_HEIGHT / 2)
+			+ game->raycast.line_height / 2) * step;
+	y = game->raycast.draw_start;
+	while (y < game->raycast.draw_end)
+	{
+		game->raycast.tex_y = (int)(texture_pos) & (texture->h - 1);
+		color = *(unsigned int *)(texture->addr + (game->raycast.tex_y
+					* texture->line_len + game->raycast.tex_x * (texture->bpp
+						/ 8)));
+		put_pixel(game, x, y, color);
+		texture_pos += step;
+		y++;
+	}
 }

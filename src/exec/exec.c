@@ -3,83 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   exec.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 18:41:58 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/29 19:15:29 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 20:01:43 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-int	close_win(t_game *game)
+static int	exec_init(t_game *game)
 {
-	if (game->data.img.mlx_img)
-		mlx_destroy_image(game->data.mlx_ptr, game->data.img.mlx_img);
-	mlx_destroy_window(game->data.mlx_ptr, game->data.win_ptr);
-	free_game(game);
-	mlx_destroy_display(game->data.mlx_ptr);
-	free(game->data.mlx_ptr);
-	exit(0);
-	return (0);
-}
-
-int	handle_keypress(int keysym, t_game *game)
-{
-	if (keysym == XK_Escape)
-		close_win(game);
-	if (keysym == XK_w || keysym == XK_z)
-		game->key.go_forward = 1;
-	if (keysym == XK_s)
-		game->key.go_backward = 1;
-	if (keysym == XK_a || keysym == XK_q)
-		game->key.go_left = 1;
-	if (keysym == XK_d)
-		game->key.go_right = 1;
-	if (keysym == XK_Left)
-		game->key.turn_left = 1;
-	if (keysym == XK_Right)
-		game->key.turn_right = 1;
-	return (0);
-}
-
-int	handle_keyrelease(int keysym, t_game *game)
-{
-	if (keysym == XK_w || keysym == XK_z)
-		game->key.go_forward = 0;
-	if (keysym == XK_s)
-		game->key.go_backward = 0;
-	if (keysym == XK_a || keysym == XK_q)
-		game->key.go_left = 0;
-	if (keysym == XK_d)
-		game->key.go_right = 0;
-	if (keysym == XK_Left)
-		game->key.turn_left = 0;
-	if (keysym == XK_Right)
-		game->key.turn_right = 0;
-	return (0);
-}
-
-int	render(t_game *game)
-{
-	calc_timeframe(game);
-	handle_rotation(game);
-	handle_right_and_left(game);
-	handle_up_and_down(game);
-	draw_floor(game);
-	raycasting(game);
-	draw_minimap(game);
-	mlx_put_image_to_window(game->data.mlx_ptr, game->data.win_ptr,
-		game->data.img.mlx_img, 0, 0);
-	draw_minimap_compass(game);
-	return (0);
-}
-
-int	exec(t_game *game)
-{
-	game->data.mlx_ptr = mlx_init();
-	if (!game->data.mlx_ptr)
-		return (1);
 	init_mmap(game);
 	game->data.win_ptr = mlx_new_window(game->data.mlx_ptr, game->screen_width,
 			game->screen_height, "cub3d");
@@ -97,12 +31,48 @@ int	exec(t_game *game)
 	if (load_textures(game))
 	{
 		printf("Failed to load textures\n");
-		mlx_destroy_image(game->data.mlx_ptr, game->data.img.mlx_img);
-		mlx_destroy_window(game->data.mlx_ptr, game->data.win_ptr);
-		mlx_destroy_display(game->data.mlx_ptr);
-		free(game->data.mlx_ptr);
+		cleanup_all(game);
 		return (1);
 	}
+	return (0);
+}
+
+int	close_win(t_game *game)
+{
+	cleanup_all(game);
+	exit(0);
+	return (0);
+}
+
+int	render(t_game *game)
+{
+	unsigned int	ceiling;
+	unsigned int	floor_col;
+
+	calc_timeframe(game);
+	handle_rotation(game);
+	handle_right_and_left(game);
+	handle_up_and_down(game);
+	ceiling = t_color_to_int(game->ceiling_color);
+	floor_col = t_color_to_int(game->floor_color);
+	draw_floor(game, 0, 0, ceiling, floor_col);
+	raycasting(game);
+	draw_minimap_cells(game);
+	draw_minimap_direction(game);
+	draw_minimap_player(game);
+	mlx_put_image_to_window(game->data.mlx_ptr, game->data.win_ptr,
+		game->data.img.mlx_img, 0, 0);
+	draw_minimap_compass(game);
+	return (0);
+}
+
+int	exec(t_game *game)
+{
+	game->data.mlx_ptr = mlx_init();
+	if (!game->data.mlx_ptr)
+		return (1);
+	if (exec_init(game))
+		return (1);
 	mlx_loop_hook(game->data.mlx_ptr, &render, game);
 	mlx_hook(game->data.win_ptr, KeyPress, KeyPressMask, &handle_keypress,
 		game);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 20:47:39 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/29 19:07:07 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/10/30 20:01:31 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,13 +125,6 @@ void	draw_minimap_direction(t_game *game)
 		}
 		i++;
 	}
-}
-
-void	draw_minimap(t_game *game)
-{
-	draw_minimap_cells(game);
-	draw_minimap_direction(game);
-	draw_minimap_player(game);
 }
 
 void	draw_minimap_compass(t_game *game)
