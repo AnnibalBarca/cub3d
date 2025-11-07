@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/30 20:01:20 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:30:02 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -207,10 +207,13 @@ void			handle_right_and_left(t_game *game);
 double			calc_timeframe(t_game *game);
 int				exec(t_game *game);
 // void			draw_minimap(t_game *game);
+void			draw_minimap_cells(t_game *game);
+void			draw_minimap_player(t_game *game);
+void			draw_minimap_direction(t_game *game);
 void			draw_minimap_compass(t_game *game);
 void			put_pixel(t_game *game, int x, int y, unsigned int color);
 void			init_mmap(t_game *game);
-void			draw_floor(t_game *game, int x, int y, unsigned int ceiling,
+void			draw_floor(t_game *game, int y, unsigned int ceiling,
 					unsigned int floor_col);
 void			draw_wall(t_game *game);
 int				handle_keypress(int keysym, t_game *game);

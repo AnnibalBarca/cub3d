@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 18:41:58 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/30 20:01:43 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:29:08 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	render(t_game *game)
 	handle_up_and_down(game);
 	ceiling = t_color_to_int(game->ceiling_color);
 	floor_col = t_color_to_int(game->floor_color);
-	draw_floor(game, 0, 0, ceiling, floor_col);
+	draw_floor(game, 0, ceiling, floor_col);
 	raycasting(game);
 	draw_minimap_cells(game);
 	draw_minimap_direction(game);

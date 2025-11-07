@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/30 16:00:20 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:36:21 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ static int	parse_input(t_game *game, int fd)
 		close(fd);
 		return (0);
 	}
-	return (0);
+	return (1);
 }
 
 int	parse_cub_file(t_game *game, char *filename)
@@ -72,7 +72,10 @@ int	parse_cub_file(t_game *game, char *filename)
 	if (fd < 0)
 		return (print_e("Failed to open file\n", 0));
 	if (!parse_input(game, fd))
-		close(fd);
+	{
+		// close(fd);
+		return (0);
+	}
 	return (1);
 }
 
