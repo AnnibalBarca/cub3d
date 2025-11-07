@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 15:42:58 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/07 16:50:05 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/07 17:12:09 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void	put_pixel_player(t_game *game, int x, int y)
 		*(unsigned int *)pixel = 0x00FF00;
 	else
 		*(unsigned int *)pixel = 0xFF0000;
-
 }
 
 void	put_pixel_direction(t_game *game, int x, int y)
@@ -78,5 +77,4 @@ void	put_pixel_direction(t_game *game, int x, int y)
 		*(unsigned int *)pixel = 0x0000FF;
 	else
 		*(unsigned int *)pixel = 0xFFFF00;
-
 }
