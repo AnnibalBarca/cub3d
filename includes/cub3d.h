@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/07 15:30:02 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:47:12 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,12 +201,14 @@ void			trim_end(char *str);
 
 /* Exec functions*/
 
+void			move_player(t_game *game, double delta_x, double delta_y);
 void			handle_rotation(t_game *game);
 void			handle_up_and_down(t_game *game);
 void			handle_right_and_left(t_game *game);
 double			calc_timeframe(t_game *game);
 int				exec(t_game *game);
 // void			draw_minimap(t_game *game);
+int				get_minimap_cell_color(t_game *game, char c);
 void			draw_minimap_cells(t_game *game);
 void			draw_minimap_player(t_game *game);
 void			draw_minimap_direction(t_game *game);

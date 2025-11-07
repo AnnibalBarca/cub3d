@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/19 18:41:58 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/11/07 15:29:08 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:45:35 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,19 @@ int	render(t_game *game)
 		game->data.img.mlx_img, 0, 0);
 	draw_minimap_compass(game);
 	return (0);
+}
+
+void	move_player(t_game *game, double delta_x, double delta_y)
+{
+	double	nx;
+	double	ny;
+
+	nx = game->player.pos_x + delta_x;
+	ny = game->player.pos_y + delta_y;
+	if (game->map[(int)game->player.pos_y][(int)nx] != '1')
+		game->player.pos_x = nx;
+	if (game->map[(int)ny][(int)game->player.pos_x] != '1')
+		game->player.pos_y = ny;
 }
 
 int	exec(t_game *game)

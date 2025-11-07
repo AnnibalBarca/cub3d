@@ -6,34 +6,11 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 20:47:39 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/30 20:01:31 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:42:53 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-int	get_minimap_cell_color(t_game *game, char c)
-{
-	int	r;
-	int	g;
-	int	b;
-
-	if (c == '1')
-	{
-		r = game->ceiling_color.r;
-		g = game->ceiling_color.g;
-		b = game->ceiling_color.b;
-		return ((r << 16) | (g << 8) | b);
-	}
-	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
-	{
-		r = game->floor_color.r;
-		g = game->floor_color.g;
-		b = game->floor_color.b;
-		return ((r << 16) | (g << 8) | b);
-	}
-	return (0x000000);
-}
 
 void	draw_one_minimap_cell(t_game *game, int x, int y)
 {

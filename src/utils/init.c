@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 10:01:37 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/29 19:09:07 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:48:10 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ void	init_textures(t_game *game)
 	game->path_south = NULL;
 	game->path_east = NULL;
 	game->path_west = NULL;
+	game->floor_color.r = -1;
+	game->floor_color.g = -1;
+	game->floor_color.b = -1;
+	game->ceiling_color.r = -1;
+	game->ceiling_color.g = -1;
+	game->ceiling_color.b = -1;
 }
 
 void	init_game(t_game *game)
@@ -44,12 +50,6 @@ void	init_game(t_game *game)
 	game->map = NULL;
 	game->map_width = 0;
 	game->map_height = 0;
-	game->floor_color.r = -1;
-	game->floor_color.g = -1;
-	game->floor_color.b = -1;
-	game->ceiling_color.r = -1;
-	game->ceiling_color.g = -1;
-	game->ceiling_color.b = -1;
 	game->player.pos_x = -1.0f;
 	game->player.pos_y = -1.0f;
 	game->player.dir_x = 0;
@@ -116,16 +116,4 @@ void	set_camera(t_player *player)
 		player->plane_x = 0;
 		player->plane_y = -0.66;
 	}
-}
-
-void	init_mmap(t_game *game)
-{
-	game->mmap.cx = game->screen_width - MINIMAP_RADIUS - 20;
-	game->mmap.cy = MINIMAP_RADIUS + 20;
-	game->mmap.radius = MINIMAP_RADIUS;
-	game->mmap.scale = 10;
-	game->mmap.map_width = game->map_width;
-	game->mmap.map_height = game->map_height;
-	game->mmap.px = 0;
-	game->mmap.py = 0;
 }

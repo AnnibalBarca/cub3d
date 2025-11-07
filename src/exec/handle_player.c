@@ -3,27 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:27:04 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/27 18:26:13 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/07 15:45:28 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
-
-void	move_player(t_game *game, double delta_x, double delta_y)
-{
-	double	nx;
-	double	ny;
-
-	nx = game->player.pos_x + delta_x;
-	ny = game->player.pos_y + delta_y;
-	if (game->map[(int)game->player.pos_y][(int)nx] != '1')
-		game->player.pos_x = nx;
-	if (game->map[(int)ny][(int)game->player.pos_x] != '1')
-		game->player.pos_y = ny;
-}
 
 void	rotate_left(t_game *game, double rot_speed)
 {

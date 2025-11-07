@@ -7,7 +7,7 @@ SRC_DIR = src
 
 SRC_ALL =	$(SRC_DIR)/main.c	\
             $(SRC_DIR)/exec/draw.c	\
-            $(SRC_DIR)/exec/move.c	\
+            $(SRC_DIR)/exec/handle_player.c	\
             $(SRC_DIR)/exec/time.c	\
             $(SRC_DIR)/exec/exec.c	\
             $(SRC_DIR)/exec/minimap.c	\
@@ -18,6 +18,7 @@ SRC_ALL =	$(SRC_DIR)/main.c	\
             $(SRC_DIR)/utils/error.c \
 			$(SRC_DIR)/utils/input.c \
             $(SRC_DIR)/utils/cleanup.c \
+            $(SRC_DIR)/utils/minimap_utils.c \
             $(SRC_DIR)/parsing/parse_textures.c \
             $(SRC_DIR)/parsing/parse_colors.c \
             $(SRC_DIR)/parsing/parsing_helpers.c \
