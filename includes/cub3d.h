@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/07 15:47:12 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:49:00 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -220,6 +220,8 @@ void			draw_floor(t_game *game, int y, unsigned int ceiling,
 void			draw_wall(t_game *game);
 int				handle_keypress(int keysym, t_game *game);
 int				handle_keyrelease(int keysym, t_game *game);
+void			put_pixel_player(t_game *game, int x, int y);
+void			put_pixel_direction(t_game *game, int x, int y);
 
 // raycasting functions
 int				ft_dda(t_game *game);

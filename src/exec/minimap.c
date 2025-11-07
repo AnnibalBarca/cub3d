@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/25 20:47:39 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/11/07 15:42:53 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/07 16:49:08 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	draw_minimap_player(t_game *game)
 				if (pixel_x >= 0 && pixel_x < game->screen_width && pixel_y >= 0
 					&& pixel_y < game->screen_height)
 				{
-					put_pixel(game, pixel_x, pixel_y, 0xFF0000);
+					put_pixel_player(game, pixel_x, pixel_y);
 				}
 			}
 			dx++;
@@ -98,7 +98,7 @@ void	draw_minimap_direction(t_game *game)
 		if (pixel_x >= 0 && pixel_x < game->screen_width && pixel_y >= 0
 			&& pixel_y < game->screen_height)
 		{
-			put_pixel(game, pixel_x, pixel_y, 0xFFFF00);
+			put_pixel_direction(game, pixel_x, pixel_y);
 		}
 		i++;
 	}
