@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/07 16:49:00 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/09 17:52:54 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define MAP_WIDTH 500
 # define WALK_SPEED 6
 # define ROTATION_SPEED 6
-# define PI 3.14159265359
 # define MINIMAP_RADIUS 80
 
 typedef struct s_color

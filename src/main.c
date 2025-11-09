@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:02:20 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/07 15:36:21 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/09 18:59:42 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,6 @@ static int	parse_input(t_game *game, int fd)
 		close(fd);
 		return (0);
 	}
-	if (!validate_required_elements(game))
-	{
-		close(fd);
-		return (print_e("Missing required elements (NO/SO/WE/EA/F/C)\n", 2), 0);
-	}
 	if (!parse_map(game, fd))
 	{
 		close(fd);
@@ -72,10 +67,8 @@ int	parse_cub_file(t_game *game, char *filename)
 	if (fd < 0)
 		return (print_e("Failed to open file\n", 0));
 	if (!parse_input(game, fd))
-	{
-		// close(fd);
 		return (0);
-	}
+	close (fd);
 	return (1);
 }
 

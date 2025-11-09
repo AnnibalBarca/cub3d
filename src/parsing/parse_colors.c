@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:03:45 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/30 16:40:01 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/09 18:39:16 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static char	**split_rgb(char *rgb_str)
 				free(split[i++]);
 			free(split);
 		}
-		ft_putstr_fd("Invalid RGB format (expected R,G,B)", 0);
+		ft_putstr_fd("Invalid RGB format (expected R,G,B)\n", 0);
 		split = NULL;
 	}
 	return (split);
@@ -51,7 +51,7 @@ static int	parse_rgb(char *rgb_str, t_color *color)
 	free(split[2]);
 	free(split);
 	if (r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255)
-		return (print_e("RGB values must be in range [0,255]", 0));
+		return (print_e("RGB values must be in range [0,255]\n", 0));
 	color->r = r;
 	color->g = g;
 	color->b = b;
@@ -81,8 +81,9 @@ static int	parse_color_identifier(char *line, t_game *game)
 	rgb_str = skip_spaces(id + 1);
 	trim_end(rgb_str);
 	if (ft_strlen(rgb_str) == 0)
-		return (print_e("Empty color value", -1));
-	parse_rgb(rgb_str, target);
+		return (print_e("Empty color value\n", -1));
+	if (!parse_rgb(rgb_str, target))
+		return (0);
 	*flag = 1;
 	return (1);
 }
@@ -103,7 +104,7 @@ static int	handle_color_line(char *line, t_game *game, int *found)
 		free(line);
 		return (1);
 	}
-	if (error == -1)
+	if (error == 0)
 	{
 		free(line);
 		return (0);
@@ -123,7 +124,7 @@ int	parse_colors(t_game *game, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (print_e("Unexpected EOF while parsing colors", 0));
+			return (print_e("Unexpected EOF while parsing colors\n", 0));
 		ret = handle_color_line(line, game, &found);
 		if (ret == 0)
 			return (0);

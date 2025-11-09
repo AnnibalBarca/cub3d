@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/10/30 16:32:47 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/09 18:54:34 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	store_texture(t_game *game, char *path, e_texture tex_type)
 	if (!dup)
 		return (print_e("Memory allocation failed\n", 0));
 	attribute_texture(game, dup, tex_type);
+	close (fd);
 	return (1);
 }
 
@@ -78,7 +79,7 @@ static int	parse_texture_identifier(char *line, t_game *game)
 	path = skip_spaces(id + 2);
 	trim_end(path);
 	if (ft_strlen(path) == 0)
-		return (print_e("Empty texture path", 0));
+		return (print_e("Empty texture path\n", 0));
 	if (!store_texture(game, path, tex_type))
 		return (0);
 	return (1);
@@ -94,7 +95,7 @@ int	parse_textures(t_game *game, int fd)
 	{
 		line = get_next_line(fd);
 		if (!line)
-			return (print_e("Unexpected EOF while parsing textures", 0));
+			return (print_e("Unexpected EOF while parsing textures\n", 0));
 		if (ft_strlen(line) == 0 || line[0] == '\n')
 		{
 			free(line);
@@ -105,7 +106,7 @@ int	parse_textures(t_game *game, int fd)
 		else
 		{
 			free(line);
-			break ;
+			return (print_e("Uncorrect required texture elements (NO/SO/WE/EA)\n", 0));
 		}
 		free(line);
 	}
