@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/07 15:42:58 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/07 17:12:09 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/09 19:48:55 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void	init_mmap(t_game *game)
 	game->mmap.cx = game->screen_width - MINIMAP_RADIUS - 20;
 	game->mmap.cy = MINIMAP_RADIUS + 20;
 	game->mmap.radius = MINIMAP_RADIUS;
-	game->mmap.scale = 10;
+	game->mmap.scale = MINIMAP_SCALE;
 	game->mmap.map_width = game->map_width;
 	game->mmap.map_height = game->map_height;
 	game->mmap.px = 0;

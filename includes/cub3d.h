@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/09 17:52:54 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:47:32 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 # include <unistd.h>
 # define WIN_HEIGHT 1500
 # define WIN_WIDTH 2000
-# define MAP_HEIGHT 500
-# define MAP_WIDTH 500
-# define WALK_SPEED 6
-# define ROTATION_SPEED 6
+# define WALK_SPEED 5
+# define ROTATION_SPEED 4
 # define MINIMAP_RADIUS 80
+# define MINIMAP_SCALE 10
+# define FOV 0.70
 
 typedef struct s_color
 {

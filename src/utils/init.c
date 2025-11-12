@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/20 10:01:37 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/11/07 15:48:10 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:32:27 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,22 +98,22 @@ void	set_camera(t_player *player)
 {
 	if (player->player_letter == 'N')
 	{
-		player->plane_x = 0.66;
+		player->plane_x = FOV;
 		player->plane_y = 0;
 	}
 	if (player->player_letter == 'S')
 	{
-		player->plane_x = -0.66;
+		player->plane_x = -FOV;
 		player->plane_y = 0;
 	}
 	if (player->player_letter == 'E')
 	{
 		player->plane_x = 0;
-		player->plane_y = 0.66;
+		player->plane_y = FOV;
 	}
 	if (player->player_letter == 'W')
 	{
 		player->plane_x = 0;
-		player->plane_y = -0.66;
+		player->plane_y = -FOV;
 	}
 }

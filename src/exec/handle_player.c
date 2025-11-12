@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   move.c                                             :+:      :+:    :+:   */
+/*   handle_player.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 15:27:04 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/11/07 15:45:28 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/12 15:45:07 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ void	handle_rotation(t_game *game)
 	if (game->delta_time <= 0.0f)
 		return ;
 	rot_speed = ROTATION_SPEED * game->delta_time;
+	if (rot_speed > 0.3)
+		rot_speed = 0.3;
 	if (game->key.turn_right)
 		rotate_right(game, rot_speed);
 	if (game->key.turn_left)
@@ -68,6 +70,8 @@ void	handle_up_and_down(t_game *game)
 	if (game->delta_time <= 0.0f)
 		return ;
 	speed = WALK_SPEED * game->delta_time;
+	if (speed > 0.3)
+		speed = 0.3;
 	if (game->key.go_forward)
 	{
 		dx = game->player.dir_x * speed;
@@ -91,6 +95,8 @@ void	handle_right_and_left(t_game *game)
 	if (game->delta_time <= 0.0f)
 		return ;
 	speed = WALK_SPEED * game->delta_time;
+	if (speed > 0.3)
+		speed = 0.3;
 	if (game->key.go_right)
 	{
 		dx = -game->player.dir_y * speed;
