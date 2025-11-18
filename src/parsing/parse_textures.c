@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/09 18:54:34 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/17 13:25:49 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int	store_texture(t_game *game, char *path, e_texture tex_type)
 	if (!dup)
 		return (print_e("Memory allocation failed\n", 0));
 	attribute_texture(game, dup, tex_type);
-	close (fd);
+	close(fd);
 	return (1);
 }
 
@@ -106,7 +106,8 @@ int	parse_textures(t_game *game, int fd)
 		else
 		{
 			free(line);
-			return (print_e("Uncorrect required texture elements (NO/SO/WE/EA)\n", 0));
+			return (print_e("Uncorrect required texture elements"
+					"(NO/SO/WE/EA)\n", 0));
 		}
 		free(line);
 	}

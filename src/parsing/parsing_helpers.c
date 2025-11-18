@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:59:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/09 18:34:00 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/17 13:25:02 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 int	validate_required_elements(t_game *game)
 {
-
 	if (!game->has_floor_color || !game->has_ceiling_color)
 		return (0);
 	return (1);

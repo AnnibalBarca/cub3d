@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/12 15:47:32 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:10:54 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 # include <string.h>
 # include <sys/time.h>
 # include <unistd.h>
-# define WIN_HEIGHT 1500
-# define WIN_WIDTH 2000
+# define WIN_HEIGHT 1080
+# define WIN_WIDTH 1920
 # define WALK_SPEED 5
 # define ROTATION_SPEED 4
 # define MINIMAP_RADIUS 80
