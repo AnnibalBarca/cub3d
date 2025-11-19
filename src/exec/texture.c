@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/23 11:04:26 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/30 20:10:37 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/19 16:42:00 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,16 @@ t_img	*get_texture(t_game *game)
 	if (game->raycast.side == 0)
 	{
 		if (game->raycast.raydir_x > 0)
-			return (&game->textures[3]);
+			return (&game->textures[WEST]);
 		else
-			return (&game->textures[2]);
+			return (&game->textures[EAST]);
 	}
 	else
 	{
 		if (game->raycast.raydir_y > 0)
-			return (&game->textures[1]);
+			return (&game->textures[NORTH]);
 		else
-			return (&game->textures[0]);
+			return (&game->textures[SOUTH]);
 	}
 	return (NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/19 13:45:12 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:32:58 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@
 # include <unistd.h>
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
-# define WALK_SPEED 5000
-# define ROTATION_SPEED 4000
+# define WALK_SPEED 5
+# define ROTATION_SPEED 4
 # define MINIMAP_RADIUS 80
 # define MINIMAP_SCALE 10
-# define FOV 0.70
+# define FOV 0.7
 
 typedef struct s_color
 {
@@ -209,5 +209,6 @@ int				load_textures(t_game *game);
 void			cleanup_all(t_game *game);
 int				t_color_to_int(t_color color);
 int				close_win(t_game *game);
+int				count_commas(char *line);
 
 #endif

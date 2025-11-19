@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_parsing.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 12:50:31 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/09 18:41:43 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:35:55 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,7 @@ static char	*read_content(t_game *game, char *tmp, int fd)
 		if (ft_strlen(line) <= 1 && game->map_height > 0)
 		{
 			free(line);
-			free(tmp);
-			return (NULL);
+			continue ;
 		}
 		if ((int)ft_strlen(line) > game->map_width)
 			game->map_width = ft_strlen(line) - 1;

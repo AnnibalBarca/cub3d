@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:03:45 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/18 15:26:37 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/19 17:47:59 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ static int	parse_color_identifier(char *line, t_game *game)
 	trim_end(rgb_str);
 	if (ft_strlen(rgb_str) == 0)
 		return (print_e("Empty color value\n", -1));
+	if (ft_strchr(rgb_str, ' ') || ft_strchr(rgb_str, '\t') || !(count_commas(rgb_str)))
+		return (print_e("Invalid RGB format\n", 0));
 	if (!parse_rgb(rgb_str, target))
 		return (0);
 	if (*id == 'F')
