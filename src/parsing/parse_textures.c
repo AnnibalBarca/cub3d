@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   parse_textures.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 13:42:48 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/17 13:25:49 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/19 13:43:04 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	attribute_texture(t_game *game, char *dup, e_texture tex_type)
+void	attribute_texture(t_game *game, char *dup, t_texture tex_type)
 {
 	if (tex_type == NORTH)
 	{
@@ -36,7 +36,7 @@ void	attribute_texture(t_game *game, char *dup, e_texture tex_type)
 	}
 }
 
-static int	store_texture(t_game *game, char *path, e_texture tex_type)
+static int	store_texture(t_game *game, char *path, t_texture tex_type)
 {
 	char	*dup;
 	int		fd;

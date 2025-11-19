@@ -6,7 +6,7 @@
 /*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/04 16:34:26 by nagaudey          #+#    #+#             */
-/*   Updated: 2025/10/30 20:12:09 by almeekel         ###   ########.fr       */
+/*   Updated: 2025/11/19 13:40:57 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,3 @@ int	ft_atoi(const char *str)
 	}
 	return (result * sign);
 }
-
