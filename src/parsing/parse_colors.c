@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_colors.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
+/*   By: almeekel <almeekel@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 14:03:45 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/09 18:39:16 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/18 15:26:37 by almeekel         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,19 +63,12 @@ static int	parse_color_identifier(char *line, t_game *game)
 	char	*id;
 	char	*rgb_str;
 	t_color	*target;
-	int		*flag;
 
 	id = skip_spaces(line);
 	if (ft_strncmp(id, "F ", 2) == 0 && !game->has_floor_color)
-	{
 		target = &game->floor_color;
-		flag = &game->has_floor_color;
-	}
 	else if (ft_strncmp(id, "C ", 2) == 0 && !game->has_ceiling_color)
-	{
 		target = &game->ceiling_color;
-		flag = &game->has_ceiling_color;
-	}
 	else
 		return (0);
 	rgb_str = skip_spaces(id + 1);
@@ -84,7 +77,10 @@ static int	parse_color_identifier(char *line, t_game *game)
 		return (print_e("Empty color value\n", -1));
 	if (!parse_rgb(rgb_str, target))
 		return (0);
-	*flag = 1;
+	if (*id == 'F')
+		game->has_floor_color = 1;
+	else
+		game->has_ceiling_color = 1;
 	return (1);
 }
 
