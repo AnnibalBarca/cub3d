@@ -65,8 +65,13 @@ $(OBJ_DIR)/%.o: %.c Makefile
 $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
-$(LIBFT):
+$(LIBFT): FORCE
 	@$(MAKE) -C $(LIBFT_DIR)
+
+FORCE:
+
+libft:
+	make -C $(LIBFT_DIR)
 
 $(MLX):
 	@printf "$(PINK)✓ MLX Compiling...$(RST)\r"
