@@ -6,7 +6,7 @@
 /*   By: nagaudey <nagaudey@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/13 15:14:57 by almeekel          #+#    #+#             */
-/*   Updated: 2025/11/18 15:10:54 by nagaudey         ###   ########.fr       */
+/*   Updated: 2025/11/19 12:58:36 by nagaudey         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@
 # include <unistd.h>
 # define WIN_HEIGHT 1080
 # define WIN_WIDTH 1920
-# define WALK_SPEED 5
-# define ROTATION_SPEED 4
+# define WALK_SPEED 5000
+# define ROTATION_SPEED 4000
 # define MINIMAP_RADIUS 80
 # define MINIMAP_SCALE 10
 # define FOV 0.70
